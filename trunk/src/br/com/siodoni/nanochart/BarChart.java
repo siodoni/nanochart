@@ -2,6 +2,10 @@ package br.com.siodoni.nanochart;
 
 import javax.microedition.lcdui.*;
 
+/**
+ *
+ * @author Flavio Augusto Siodoni Ximenes
+ */
 public class BarChart extends Canvas implements CommandListener {
 
     private Main chart;
