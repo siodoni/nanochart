@@ -25,8 +25,8 @@ public class BarChart extends Canvas implements CommandListener {
 
         largura = getWidth();
         altura = getHeight();
-        inicioAltura = (altura * 30) / 100; // 30% no inicio do eixo Y
-        inicioLargura = (largura * 10) / 100; // 10% no inicio do eixo X
+        inicioAltura = (altura * 23) / 100; // 23% no inicio do eixo Y
+        inicioLargura = (largura * 5) / 100; // 5% no inicio do eixo X
         fimAltura = altura - inicioLargura;
         fimLargura = largura - inicioLargura;
         distCol = (largura * 2) / 100; // 2% entre as colunas
@@ -85,9 +85,9 @@ public class BarChart extends Canvas implements CommandListener {
         g.setColor(0x00000000);
         g.drawRoundRect(1, tamTab, largTab, 30, 10, 10);
         g.setColor(0x00DCDCDC);
-        g.fillRoundRect(largTab + 1, tamTab, largTab, altTab, angTab, angTab);
+        g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
         g.setColor(0x00000000);
-        g.drawRoundRect(largTab + 1, tamTab, largTab, altTab, angTab, angTab);
+        g.drawRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
         g.drawRect(0, altTab * 2, largura, altura);
         g.setColor(0x00FFFFFF);
         g.fillRect(1, altTab * 2, largTab, altura);
@@ -101,8 +101,8 @@ public class BarChart extends Canvas implements CommandListener {
         g.setColor(0x00000000);
         g.drawLine(inicioLargura, inicioAltura - distCol, inicioLargura, fimAltura + distCol);
         g.drawLine(inicioLargura + 1, inicioAltura - distCol, inicioLargura + 1, fimAltura + distCol);
-        g.drawLine(inicioLargura - distCol, fimAltura, fimLargura, fimAltura);
-        g.drawLine(inicioLargura - distCol, fimAltura + 1, fimLargura, fimAltura + 1);
+        g.drawLine(inicioLargura - distCol, fimAltura, fimLargura + distCol, fimAltura);
+        g.drawLine(inicioLargura - distCol, fimAltura + 1, fimLargura + distCol, fimAltura + 1);
     }
 
     private void drawColumn(Graphics g) {
@@ -123,7 +123,7 @@ public class BarChart extends Canvas implements CommandListener {
             g.fillRect(5, acumulado, 15, 15);
             g.setColor(0x00000000);
             g.drawRect(5, acumulado, 15, 15);
-            g.drawString(rotulo[i], 25, acumulado, Graphics.TOP | Graphics.LEFT);
+            g.drawString(rotulo[i] + " - " + valor[i], 25, acumulado, Graphics.TOP | Graphics.LEFT);
             acumulado += 20;
         }
     }
