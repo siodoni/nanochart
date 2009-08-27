@@ -1,0 +1,6 @@
+MIDlet-1: Main, ,br.com.siodoni.nanochart.Chart
+MIDlet-Vendor: Flavio Augusto Siodoni Ximenes
+MIDlet-Name: nanochart
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
