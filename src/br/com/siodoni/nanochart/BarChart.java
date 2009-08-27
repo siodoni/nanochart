@@ -11,7 +11,7 @@ public class BarChart extends Canvas implements CommandListener {
     private Chart chart;
     private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna;
-    private int valor[] = {4, 10, 5, 3, 2, 7};
+    private int valor[] = {4, 10, 5, 3};
     private int cor[] = {0x00FF4500, 0x000000CD, 0x00FFFF00, 0x0000CD00, 0x007FFFD4, 0x006495ED, 0x00FFA500, 0x00FF3030, 0x001C86EE, 0x00000000};
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
     private String titulo = "Titulo";
