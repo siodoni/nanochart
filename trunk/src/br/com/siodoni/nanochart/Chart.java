@@ -8,11 +8,11 @@ import javax.microedition.midlet.MIDlet;
  *
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class Main extends MIDlet {
+public class Chart extends MIDlet {
 
     private Canvas canvas;
 
-    public Main() {
+    public Chart() {
         //canvas = new PieChart(this);
         canvas = new BarChart(this);
     }
