@@ -15,6 +15,7 @@ public class PieChart extends Canvas implements CommandListener {
     private String titulo = "Titulo";
 
     public PieChart(Chart midlet) {
+        setFullScreenMode(true);
         this.chart = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);

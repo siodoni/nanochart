@@ -17,6 +17,7 @@ public class BarChart extends Canvas implements CommandListener {
     private String titulo = "Titulo";
 
     public BarChart(Chart midlet) {
+        setFullScreenMode(true);
         this.chart = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
@@ -112,6 +113,7 @@ public class BarChart extends Canvas implements CommandListener {
             g.fillRect(acumulado, inicioAltura, larguraColuna, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
             acumulado += distCol + larguraColuna;
         }
+        acumulado = inicioLargura + distCol;
     }
 
     private void drawData(Graphics g) {
