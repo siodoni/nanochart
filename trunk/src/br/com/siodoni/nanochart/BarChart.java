@@ -15,6 +15,7 @@ public class BarChart extends Canvas implements CommandListener {
     private int cor[] = {0x00FF4500, 0x000000CD, 0x00FFFF00, 0x0000CD00, 0x007FFFD4, 0x006495ED, 0x00FFA500, 0x00FF3030, 0x001C86EE, 0x00000000};
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
     private String titulo = "Titulo";
+    private boolean grafico = true;
 
     public BarChart(Chart midlet) {
         setFullScreenMode(true);
@@ -48,16 +49,33 @@ public class BarChart extends Canvas implements CommandListener {
         drawTabPanel(g);
 
         //Desenhando os eixos
-        drawAxis(g);
+        if (this.grafico) {
+            drawAxis(g);
+        }
 
         //Desenhando as colunas.
-        drawColumn(g);
-        //drawData(g);
+        if (this.grafico) {
+            drawColumn(g);
+        } else {
+            drawData(g);
+        }
     }
 
     public void commandAction(Command c, Displayable d) {
         if (c == cmdSair) {
             chart.destroyApp(false);
+        }
+    }
+
+    protected void keyPressed(int keyCode) {
+        int tecla = getGameAction(keyCode);
+
+        if (tecla == UP) {
+            this.grafico = false;
+            repaint();
+        } else if (tecla == DOWN) {
+            this.grafico = true;
+            repaint();
         }
     }
 
@@ -82,15 +100,24 @@ public class BarChart extends Canvas implements CommandListener {
 
     private void drawTabPanel(Graphics g) {
         int tamTab = largura / 6, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
+
+        if (grafico) {
+            g.setColor(0x00DCDCDC);
+            g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
+        } else {
+            g.setColor(0x00DCDCDC);
+            g.fillRoundRect(1, tamTab, largTab, 30, 10, 10);
+        }
         g.setColor(0x00000000);
         g.drawRoundRect(1, tamTab, largTab, 30, 10, 10);
-        g.setColor(0x00DCDCDC);
-        g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
-        g.setColor(0x00000000);
         g.drawRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
         g.drawRect(0, altTab * 2, largura, altura);
         g.setColor(0x00FFFFFF);
-        g.fillRect(1, altTab * 2, largTab, altura);
+        if (this.grafico) {
+            g.fillRect(1, altTab * 2, largTab, altura);
+        } else {
+            g.fillRect(largTab + 1, altTab * 2, largTab, altura);
+        }
         g.fillRect(1, (altTab * 2) + 1, largura, altura);
         g.setColor(0x00000000);
         g.drawString("Gráfico", distCol, tamTab + distCol, Graphics.TOP | Graphics.LEFT);
@@ -106,6 +133,7 @@ public class BarChart extends Canvas implements CommandListener {
     }
 
     private void drawColumn(Graphics g) {
+        acumulado = inicioLargura + distCol;
         for (int i = 0; i < valor.length; i++) {
             g.setColor(cor[i]);
             g.fillRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
@@ -113,7 +141,6 @@ public class BarChart extends Canvas implements CommandListener {
             g.fillRect(acumulado, inicioAltura, larguraColuna, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
             acumulado += distCol + larguraColuna;
         }
-        acumulado = inicioLargura + distCol;
     }
 
     private void drawData(Graphics g) {

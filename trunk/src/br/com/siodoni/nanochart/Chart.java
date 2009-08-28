@@ -1,14 +1,13 @@
 package br.com.siodoni.nanochart;
 
-import javax.microedition.lcdui.Canvas;
-import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.*;
 import javax.microedition.midlet.MIDlet;
 
 /**
  *
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class Chart extends MIDlet {
+public class Chart extends MIDlet{
 
     private Canvas canvas;
 
