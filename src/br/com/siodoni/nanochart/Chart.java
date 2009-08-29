@@ -7,7 +7,7 @@ import javax.microedition.midlet.MIDlet;
  *
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class Chart extends MIDlet{
+public class Chart extends MIDlet {
 
     private Canvas canvas;
 

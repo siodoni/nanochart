@@ -16,6 +16,7 @@ public class BarChart extends Canvas implements CommandListener {
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
     private String titulo = "Titulo";
     private boolean grafico = true;
+    private Texto txtGrafico, txtDados;
 
     public BarChart(Chart midlet) {
         setFullScreenMode(true);
@@ -120,8 +121,11 @@ public class BarChart extends Canvas implements CommandListener {
         }
         g.fillRect(1, (altTab * 2) + 1, largura, altura);
         g.setColor(0x00000000);
-        g.drawString("Gráfico", distCol, tamTab + distCol, Graphics.TOP | Graphics.LEFT);
-        g.drawString("Dados", largTab + distCol, tamTab + distCol, Graphics.TOP | Graphics.LEFT);
+
+        txtGrafico = new Texto("Grafico", distCol, tamTab + distCol, "fonte.png");
+        txtDados = new Texto("Dados", largTab + distCol, tamTab + distCol, "fonte.png");
+        txtGrafico.paint(g);
+        txtDados.paint(g);
     }
 
     private void drawAxis(Graphics g) {
