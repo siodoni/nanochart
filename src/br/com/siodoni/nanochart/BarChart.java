@@ -122,10 +122,10 @@ public class BarChart extends Canvas implements CommandListener {
         g.fillRect(1, (altTab * 2) + 1, largura, altura);
         g.setColor(0x00000000);
 
-        //txtGrafico = new Texto("Grafico", distCol, tamTab + distCol, "fonte.png");
-        //txtDados = new Texto("Dados", largTab + distCol, tamTab + distCol, "fonte.png");
-        //txtGrafico.paint(g);
-        //txtDados.paint(g);
+        txtGrafico = new Texto("Grafico", distCol, tamTab + distCol, "fonte.png");
+        txtDados = new Texto("Dados", largTab + distCol, tamTab + distCol, "fonte.png");
+        txtGrafico.paint(g);
+        txtDados.paint(g);
     }
 
     private void drawAxis(Graphics g) {
