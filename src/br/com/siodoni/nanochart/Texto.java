@@ -24,7 +24,7 @@ public class Texto {
     public void setFonte(String fonte) {
         this.fonte = fonte;
         try {
-            imgFonte = Image.createImage("" + fonte);
+            imgFonte = Image.createImage("br/com/siodoni/nanochart/img/" + fonte);
         } catch (Exception e) {
             System.out.println("Erro ao carregar imagem");
         }
