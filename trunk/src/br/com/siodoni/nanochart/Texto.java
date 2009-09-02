@@ -9,6 +9,9 @@ public class Texto {
     private int x, y;
     private String fonte;
     private Image imgFonte;
+    public static final String SIZE_LARGE = "br/com/siodoni/nanochart/img/FontLarge.png";
+    public static final String SIZE_MEDIUM = "br/com/siodoni/nanochart/img/FontMedium.png";
+    public static final String SIZE_SMALL = "br/com/siodoni/nanochart/img/FontSmall.png";
 
     public Texto(String texto, int x, int y, String fonte) {
         this.x = x;
@@ -24,7 +27,7 @@ public class Texto {
     public void setFonte(String fonte) {
         this.fonte = fonte;
         try {
-            imgFonte = Image.createImage("br/com/siodoni/nanochart/img/" + fonte);
+            imgFonte = Image.createImage(fonte);
         } catch (Exception e) {
             System.out.println("Erro ao carregar imagem");
         }
