@@ -56,7 +56,7 @@ public class Texto {
 
     public void paint(Graphics g) {
         int tamLetra;
-        tamLetra = imgFonte.getWidth() / 94;
+        tamLetra = imgFonte.getWidth() / 222;
         for (int i = 0; i < this.getTexto().length(); i++) {
             g.drawRegion(imgFonte, (this.getTexto().substring(i, i + 1).hashCode() - 32) * tamLetra, 0, tamLetra, imgFonte.getHeight(), 0, this.getX() + (i * tamLetra), this.getY(), 0);
         }

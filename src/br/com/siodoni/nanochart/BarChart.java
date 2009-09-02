@@ -16,7 +16,7 @@ public class BarChart extends Canvas implements CommandListener {
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
     private String titulo = "Titulo";
     private boolean grafico = true;
-    private Texto txtGrafico, txtDados;
+    private Texto txtGrafico, txtDados, txtTitulo, txtRotulo;
 
     public BarChart(Chart midlet) {
         setFullScreenMode(true);
@@ -43,8 +43,8 @@ public class BarChart extends Canvas implements CommandListener {
         g.fillRect(0, 0, largura, altura);
 
         //Desenhando o titulo
-        g.setColor(0x00000000);
-        g.drawString(titulo, inicioLargura, distCol, Graphics.TOP | Graphics.LEFT);
+        txtTitulo = new Texto(titulo, inicioLargura, distCol, "FontLarge.png");
+        txtTitulo.paint(g);
 
         //Desenhando a tabpanel
         drawTabPanel(g);
@@ -122,8 +122,8 @@ public class BarChart extends Canvas implements CommandListener {
         g.fillRect(1, (altTab * 2) + 1, largura, altura);
         g.setColor(0x00000000);
 
-        txtGrafico = new Texto("Grafico", distCol, tamTab + distCol, "fonte.png");
-        txtDados = new Texto("Dados", largTab + distCol, tamTab + distCol, "fonte.png");
+        txtGrafico = new Texto("Grafico", distCol, tamTab + distCol, "FontMedium.png");
+        txtDados = new Texto("Dados", largTab + distCol, tamTab + distCol, "FontMedium.png");
         txtGrafico.paint(g);
         txtDados.paint(g);
     }
@@ -154,7 +154,8 @@ public class BarChart extends Canvas implements CommandListener {
             g.fillRect(5, acumulado, 15, 15);
             g.setColor(0x00000000);
             g.drawRect(5, acumulado, 15, 15);
-            g.drawString(rotulo[i] + " - " + valor[i], 25, acumulado, Graphics.TOP | Graphics.LEFT);
+            txtRotulo = new Texto(rotulo[i] + " - " + valor[i], 25, acumulado, "FontSmall.png");
+            txtRotulo.paint(g);
             acumulado += 20;
         }
     }
