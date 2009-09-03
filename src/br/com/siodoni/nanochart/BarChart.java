@@ -43,7 +43,7 @@ public class BarChart extends Canvas implements CommandListener {
 
         //Desenhando o titulo
         g.setColor(0, 0, 0);
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE));
+        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_LARGE));
         g.drawString(titulo, inicioLargura, distCol, Graphics.LEFT | Graphics.TOP);
 
         //Desenhando a tabpanel
