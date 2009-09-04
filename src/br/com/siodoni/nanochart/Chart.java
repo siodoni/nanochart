@@ -10,6 +10,7 @@ import javax.microedition.midlet.MIDlet;
 public class Chart extends MIDlet {
 
     private Canvas canvas;
+    private Form form;
 
     public Chart() {
         //canvas = new PieChart(this);
