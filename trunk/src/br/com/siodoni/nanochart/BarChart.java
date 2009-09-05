@@ -11,10 +11,10 @@ public class BarChart extends Canvas implements CommandListener {
     private Chart chart;
     private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamTitEixoX, tamTitEixoY;
-    private int valor[] = {4, 10, 5, 3, 5, 7, 2, 1, 9, 6};
-    private int cor[] = {0x00FF4500, 0x000000CD, 0x00FFFF00, 0x0000CD00, 0x007FFFD4, 0x006495ED, 0x00FFA500, 0x00FF3030, 0x001C86EE, 0x00000000};
+    private int valor[] = {7, 6, 4, 3, 8};
+    private int cor[] = {0x000000CD, 0x0032CD32, 0x00FFD700, 0x00FF4500, 0x009A32CD};
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
-    private String titulo = "Titulo", tituloEixoX = "Titulo do eixo x", tituloEixoY = "Titulo do eixo y";
+    private String titulo = "Titulo", tituloEixoX = "", tituloEixoY = "";
     private boolean grafico = true;
 
     public BarChart(Chart midlet) {
@@ -80,10 +80,10 @@ public class BarChart extends Canvas implements CommandListener {
     protected void keyPressed(int keyCode) {
         int tecla = getGameAction(keyCode);
 
-        if (tecla == RIGHT) {
+        if (tecla == Canvas.RIGHT) {
             this.grafico = false;
             repaint();
-        } else if (tecla == LEFT) {
+        } else if (tecla == Canvas.LEFT) {
             this.grafico = true;
             repaint();
         }
@@ -154,7 +154,7 @@ public class BarChart extends Canvas implements CommandListener {
         if (tamTitEixoY > 0) {
             int acumuladoEixoY = inicioAltura - distCol;
             for (int i = 0; i < tamTitEixoY; i++) {
-                g.drawString(tituloEixoY.substring(i, i + 1), inicioLargura/2, acumuladoEixoY, Graphics.LEFT | Graphics.TOP);
+                g.drawString(tituloEixoY.substring(i, i + 1), inicioLargura / 2, acumuladoEixoY, Graphics.LEFT | Graphics.TOP);
                 acumuladoEixoY += Font.SIZE_SMALL;
             }
             acumuladoEixoY = inicioAltura - distCol;
@@ -175,13 +175,15 @@ public class BarChart extends Canvas implements CommandListener {
     private void drawData(Graphics g) {
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
         acumulado = inicioAltura;
+        int tamLegenda = altura / 20;
         for (int i = 0; i < valor.length; i++) {
             g.setColor(cor[i]);
-            g.fillRect(5, acumulado, 15, 15);
+            g.fillRect(5, acumulado, tamLegenda, tamLegenda);
             g.setColor(0x00000000);
-            g.drawRect(5, acumulado, 15, 15);
-            g.drawString(rotulo[i] + " - " + valor[i], 25, acumulado, Graphics.LEFT | Graphics.TOP);
-            acumulado += 20;
+            g.drawRect(5, acumulado, tamLegenda, tamLegenda);
+            g.drawString(rotulo[i] + " - " + valor[i], tamLegenda * 2, acumulado, Graphics.LEFT | Graphics.TOP);
+            acumulado += tamLegenda + distCol;
         }
+        acumulado = inicioAltura;
     }
 }
