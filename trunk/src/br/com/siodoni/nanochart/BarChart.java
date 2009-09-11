@@ -14,7 +14,8 @@ public class BarChart extends Canvas implements CommandListener {
     private int cor[] = {0x000000CD, 0x0032CD32, 0x00FFD700, 0x00FF4500, 0x009A32CD, 0x00000080, 0x0000AA44, 0x00AA8800, 0x00800000, 0x00660080};
     private int valor[] = {3, 4, 8, 7, 5, 2, 1, 6, 10, 9};
     private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
-    private String titulo = "Título", tituloEixoX = "", tituloEixoY = "", erro = "";
+    private String titulo = "Título", tituloEixoX = "", tituloEixoY = "";
+    private StringBuffer erro = new StringBuffer("");
     private boolean grafico = true, validado = false, existeNegativo = false;
 
     public BarChart(Chart midlet) {
@@ -42,7 +43,7 @@ public class BarChart extends Canvas implements CommandListener {
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
         fimLargura = largura - inicioLargura;
-        distCol = (largura * 2) / 100; // 2% entre as colunas
+        distCol = (largura * 2) / 100; // % entre as colunas
         acumulado = inicioLargura + distCol;
         areaTotal = fimLargura - inicioLargura;
         larguraColuna = (areaTotal / valor.length) - distCol;
@@ -53,7 +54,7 @@ public class BarChart extends Canvas implements CommandListener {
         g.setColor(255, 255, 255);
         g.fillRect(0, 0, largura, altura);
 
-        // Validando as informações
+        //Validando as informações
         validaInformacoes(g);
 
         if (validado) {
@@ -131,16 +132,15 @@ public class BarChart extends Canvas implements CommandListener {
         g.setColor(0x00000000);
         g.drawRoundRect(1, tamTab, largTab, 30, 10, 10);
         g.drawRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
-        g.drawRect(0, altTab * 2, largura, altura);
+        g.drawRect(0, altTab * 2, largura - 1, altura);
         g.setColor(0x00FFFFFF);
 
         if (this.grafico) {
             g.fillRect(1, altTab * 2, largTab, altura);
         } else {
-            g.fillRect(largTab + 1, altTab * 2, largTab, altura);
+            g.fillRect(largTab + 1, altTab * 2, largTab - 2, altura);
         }
-        g.fillRect(1, (altTab * 2) + 1, largura, altura);
-
+        g.fillRect(1, (altTab * 2) + 1, largura - 2, altura);
         g.setColor(0x00000000);
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
         g.drawString(" Gráfico", distCol, tamTab + distCol, Graphics.LEFT | Graphics.TOP);
@@ -198,35 +198,26 @@ public class BarChart extends Canvas implements CommandListener {
 
     private void validaInformacoes(Graphics g) {
         if (existeNegativo) {
-            erro += "\nOs valores para o gráfico" +
-                    "\ndevem ser positivos\n";
+            erro.append("\nOs valores para o gráfico \ndevem ser positivos\n");
+        }
+        if (tamRotulo > 10 || tamValor > 10) {
+            erro.append("\nO tamanho maximo de valores \ndeve ser 10.\n");
+        }
+        if (tamRotulo != tamValor) {
+            erro.append("\nDiferença de tamanho entre \no array do rótulo e do valor.\n");
+        }
+
+        if (erro.length() > 0) {
             validado = false;
-
-            System.out.println("1");
-
-        } else if (tamRotulo > 10 || tamValor > 10) {
-            erro += "\nO tamanho maximo de valores" +
-                    "\ndeve ser 10.\n";
-            validado = false;
-
-            System.out.println("2");
-        } else if (tamRotulo != tamValor) {
-            erro += "\nDiferença de tamanho entre" +
-                    "\no array do rótulo e do valor.\n";
-            validado = false;
-
-            System.out.println("3");
         } else {
             validado = true;
-
-            System.out.println("4");
         }
 
         if (!validado) {
-            erro = "Erro na montagem do gráfico!\n" + erro;
+            erro.insert(0, "Erro na montagem do gráfico!\n");
             g.setColor(0, 0, 0);
             g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
-            g.drawString(erro, 0, 0, Graphics.LEFT | Graphics.TOP);
+            g.drawString(erro.toString(), 0, 0, Graphics.LEFT | Graphics.TOP);
         }
     }
 }
