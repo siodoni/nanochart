@@ -140,6 +140,7 @@ public class BarChart extends Canvas implements CommandListener {
         } else {
             g.fillRect(largTab + 1, altTab * 2, largTab - 2, altura);
         }
+
         g.fillRect(1, (altTab * 2) + 1, largura - 2, altura);
         g.setColor(0x00000000);
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
@@ -160,6 +161,7 @@ public class BarChart extends Canvas implements CommandListener {
         //Eixo Y
         g.drawLine(inicioLargura, inicioAltura - distCol, inicioLargura, fimAltura + distCol);
         g.drawLine(inicioLargura + 1, inicioAltura - distCol, inicioLargura + 1, fimAltura + distCol);
+
         if (tamTitEixoY > 0) {
             int acumuladoEixoY = inicioAltura - distCol;
             for (int i = 0; i < tamTitEixoY; i++) {
@@ -175,8 +177,12 @@ public class BarChart extends Canvas implements CommandListener {
         for (int i = 0; i < tamValor; i++) {
             g.setColor(cor[i]);
             g.fillRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
+            g.setColor(0x00000000);
+            g.drawRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
             g.setColor(0x00FFFFFF);
-            g.fillRect(acumulado, inicioAltura, larguraColuna, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
+            g.fillRect(acumulado, inicioAltura, larguraColuna + 1, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
+            g.setColor(0x00000000);
+            g.drawLine(acumulado, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])), acumulado + larguraColuna, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])));
             acumulado += distCol + larguraColuna;
         }
     }
@@ -201,18 +207,16 @@ public class BarChart extends Canvas implements CommandListener {
             erro.append("\nOs valores para o gráfico \ndevem ser positivos\n");
         }
         if (tamRotulo > 10 || tamValor > 10) {
-            erro.append("\nO tamanho maximo de valores \ndeve ser 10.\n");
+        erro.append("\nO tamanho maximo de valores \ndeve ser 10.\n");
         }
         if (tamRotulo != tamValor) {
             erro.append("\nDiferença de tamanho entre \no array do rótulo e do valor.\n");
         }
-
         if (erro.length() > 0) {
             validado = false;
         } else {
             validado = true;
         }
-
         if (!validado) {
             erro.insert(0, "Erro na montagem do gráfico!\n");
             g.setColor(0, 0, 0);
