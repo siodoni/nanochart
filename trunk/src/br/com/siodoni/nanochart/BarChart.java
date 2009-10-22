@@ -6,39 +6,39 @@ import javax.microedition.lcdui.*;
  *
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class BarChart extends Canvas implements CommandListener, Cor {
+public class BarChart extends Canvas implements CommandListener {
 
     private Chart chart;
     private Command cmdSair;
-    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamTitEixoX, tamTitEixoY, tamRotulo, tamValor, maiorValor;
-    private int cor[] = {Cor.AZUL_CLARO, Cor.VERDE_CLARO, Cor.AMARELO_CLARO, Cor.VERMELHO_CLARO, Cor.ROXO_CLARO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
-    private int valor[] = {3, 4, 8, 7, 5, 2, 1, 6, 10, 9};
-    private String rotulo[] = {"valor 1", "valor 2", "valor 3", "valor 4", "valor 5", "valor 6", "valor 7", "valor 8", "valor 9", "valor 10"};
-    private String titulo = "Título do gráfico de barras", tituloEixoX = "", tituloEixoY = "";
+    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor;
+    private int cor[];
+    private int valor[];
+    private String rotulo[];
+    private String titulo;
     private StringBuffer erro = new StringBuffer("");
     private boolean grafico = true, validado = false, existeNegativo = false;
+    private Util util = new Util();
 
-    public BarChart(Chart midlet) {
+    public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo) {
+
+        this.cor = cor;
+        this.valor = valor;
+        this.rotulo = rotulo;
+        this.titulo = titulo;
+
         setFullScreenMode(true);
         this.chart = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         setCommandListener(this);
 
-        tamTitEixoX = tituloEixoX.length();
-        tamTitEixoY = tituloEixoY.length();
         tamRotulo = rotulo.length;
         tamValor = valor.length;
         maiorValor = getMaiorValor();
+        percLargura = 5;
 
-        if (tamTitEixoX > 0 || tamTitEixoY > 0) {
-            percLargura = 10;
-        } else {
-            percLargura = 5;
-        }
-
-        largura = getWidth();
-        altura = getHeight();
+        largura = util.getWidth();
+        altura = util.getHeight();
         inicioAltura = (altura * 23) / 100; // % no inicio do eixo Y
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
@@ -122,10 +122,10 @@ public class BarChart extends Canvas implements CommandListener, Cor {
         int tamTab = largura / 7, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
 
         if (grafico) {
-            g.setColor(Cor.CINZA_CLARO);
+            g.setColor(Cor.CINZA);
             g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
         } else {
-            g.setColor(Cor.CINZA_CLARO);
+            g.setColor(Cor.CINZA);
             g.fillRoundRect(1, tamTab, largTab, altTab, angTab, angTab);
         }
 
@@ -156,20 +156,10 @@ public class BarChart extends Canvas implements CommandListener, Cor {
         g.setColor(Cor.PRETO);
         g.drawLine(inicioLargura - distCol, fimAltura, fimLargura, fimAltura);
         g.drawLine(inicioLargura - distCol, fimAltura + 1, fimLargura, fimAltura + 1);
-        g.drawString(tituloEixoX, inicioLargura, fimAltura + distCol, Graphics.LEFT | Graphics.TOP);
 
         //Eixo Y
         g.drawLine(inicioLargura, inicioAltura - distCol, inicioLargura, fimAltura + distCol);
         g.drawLine(inicioLargura + 1, inicioAltura - distCol, inicioLargura + 1, fimAltura + distCol);
-
-        if (tamTitEixoY > 0) {
-            int acumuladoEixoY = inicioAltura - distCol;
-            for (int i = 0; i < tamTitEixoY; i++) {
-                g.drawString(tituloEixoY.substring(i, i + 1), inicioLargura / 2, acumuladoEixoY, Graphics.LEFT | Graphics.TOP);
-                acumuladoEixoY += Font.SIZE_SMALL;
-            }
-            acumuladoEixoY = inicioAltura - distCol;
-        }
     }
 
     private void drawColumn(Graphics g) {
