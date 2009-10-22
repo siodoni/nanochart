@@ -10,9 +10,8 @@ public class PieChart extends Canvas implements CommandListener {
 
     private Chart chart;
     private Command cmdSair;
-    private int valor[] = {10, 20, 30, 40, 50};//, 60, 70, 80, 90, 100};
-    private int cor[] = {0x00FF4500, 0x000000CD, 0x00FFFF00, 0x0000CD00, 0x007FFFD4, 0x006495ED, 0x00FFA500, 0x00FF3030, 0x001C86EE, 0x00000000};
-    private String titulo = "Titulo";
+    private int valor[] = {3, 4, 8, 7, 5, 2, 1, 6, 10, 9};//{10, 20, 30, 40, 50};//, 60, 70, 80, 90, 100};
+    private int cor[] = {Cor.AZUL, Cor.VERDE, Cor.AMARELO, Cor.VERMELHO, Cor.ROXO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
 
     public PieChart(Chart midlet) {
         setFullScreenMode(true);
