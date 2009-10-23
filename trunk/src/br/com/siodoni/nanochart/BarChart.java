@@ -152,6 +152,10 @@ public class BarChart extends Canvas implements CommandListener {
     }
 
     private void drawAxis(Graphics g) {
+
+        g.setColor(Cor.CINZA);
+        g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimAltura - inicioAltura);
+
         g.setColor(Cor.PRETO);
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 
@@ -172,7 +176,7 @@ public class BarChart extends Canvas implements CommandListener {
             g.fillRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
             g.setColor(Cor.PRETO);
             g.drawRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
-            g.setColor(Cor.BRANCO);
+            g.setColor(Cor.CINZA);
             g.fillRect(acumulado, inicioAltura, larguraColuna + 1, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
             g.setColor(Cor.PRETO);
             g.drawLine(acumulado, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])), acumulado + larguraColuna, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])));
