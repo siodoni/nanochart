@@ -7,9 +7,8 @@ import javax.microedition.lcdui.Graphics;
  *
  * @author Flavio
  */
-public class Util extends Canvas{
+public class Util extends Canvas {
 
     protected void paint(Graphics g) {
     }
-
 }

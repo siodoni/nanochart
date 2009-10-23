@@ -72,6 +72,7 @@ public class BarChart extends Canvas implements CommandListener {
                 //Desenhando as colunas
                 drawColumn(g);
             } else {
+                //Desenhando a tabela de legenda
                 drawData(g);
             }
         } else {
@@ -90,9 +91,11 @@ public class BarChart extends Canvas implements CommandListener {
         if (tecla == Canvas.RIGHT) {
             this.grafico = false;
             repaint();
+            serviceRepaints();
         } else if (tecla == Canvas.LEFT) {
             this.grafico = true;
             repaint();
+            serviceRepaints();
         }
     }
 
@@ -153,7 +156,6 @@ public class BarChart extends Canvas implements CommandListener {
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
 
         //Eixo X
-        g.setColor(Cor.PRETO);
         g.drawLine(inicioLargura - distCol, fimAltura, fimLargura, fimAltura);
         g.drawLine(inicioLargura - distCol, fimAltura + 1, fimLargura, fimAltura + 1);
 
