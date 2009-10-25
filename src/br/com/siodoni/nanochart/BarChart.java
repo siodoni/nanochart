@@ -11,23 +11,22 @@ public class BarChart extends Canvas implements CommandListener {
     private Chart chart;
     private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor;
-    private int cor[];
+    private int cor[], posTab[] = new int[6];
     private int valor[];
     private String rotulo[];
     private String titulo;
-    private StringBuffer erro = new StringBuffer("");
+    private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
     private Util util = new Util();
 
     public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo) {
-
+        this.chart = midlet;
         this.cor = cor;
         this.valor = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
 
         setFullScreenMode(true);
-        this.chart = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         setCommandListener(this);
@@ -64,16 +63,16 @@ public class BarChart extends Canvas implements CommandListener {
             g.drawString(titulo, inicioLargura, distCol, Graphics.LEFT | Graphics.TOP);
 
             //Desenhando a tabpanel
-            drawTabPanel(g);
+            desenhaTabPanel(g);
 
             if (this.grafico) {
                 //Desenhando os eixos
-                drawAxis(g);
+                desenhaEixo(g);
                 //Desenhando as colunas
-                drawColumn(g);
+                desenhaColuna(g);
             } else {
                 //Desenhando a tabela de legenda
-                drawData(g);
+                desenhaLegenda(g);
             }
         } else {
         }
@@ -94,6 +93,19 @@ public class BarChart extends Canvas implements CommandListener {
             serviceRepaints();
         } else if (tecla == Canvas.LEFT) {
             this.grafico = true;
+            repaint();
+            serviceRepaints();
+        }
+    }
+
+    protected void pointerPressed(int x, int y) {
+        if ((x >= posTab[0] && y <= posTab[1]) || (x >= posTab[0] && y <= posTab[2])) {
+            this.grafico = true;
+            repaint();
+            serviceRepaints();
+        }
+        if ((x >= posTab[3] && y <= posTab[4]) || (x >= posTab[3] && y <= posTab[5])) {
+            this.grafico = false;
             repaint();
             serviceRepaints();
         }
@@ -121,7 +133,7 @@ public class BarChart extends Canvas implements CommandListener {
         return (valor * getTamMaxColuna()) / maiorValor;
     }
 
-    private void drawTabPanel(Graphics g) {
+    private void desenhaTabPanel(Graphics g) {
         int tamTab = largura / 7, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
 
         if (grafico) {
@@ -133,8 +145,18 @@ public class BarChart extends Canvas implements CommandListener {
         }
 
         g.setColor(Cor.PRETO);
-        g.drawRoundRect(1, tamTab, largTab, 30, 10, 10);
+        g.drawRoundRect(1, tamTab, largTab, altTab, angTab, angTab);
         g.drawRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
+
+        //Guardando as posições.
+        posTab[0] = tamTab;                  // X inicial
+        posTab[1] = posTab[0] + largTab;     // X final largura
+        posTab[2] = posTab[0] + altTab;      // X final altura
+
+        posTab[3] = largTab + 1;             // Y inicial
+        posTab[4] = posTab[3] + largTab - 3; // Y final largura
+        posTab[5] = posTab[3] + altTab;      // Y final altura
+
         g.drawRect(0, altTab * 2, largura - 1, altura);
         g.setColor(Cor.BRANCO);
 
@@ -151,24 +173,27 @@ public class BarChart extends Canvas implements CommandListener {
         g.drawString(" Dados", largTab + distCol, tamTab + distCol, Graphics.LEFT | Graphics.TOP);
     }
 
-    private void drawAxis(Graphics g) {
-
+    private void desenhaEixo(Graphics g) {
+        //Fundo
         g.setColor(Cor.CINZA);
-        g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimAltura - inicioAltura);
+        g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura - 2, fimAltura - inicioAltura);
 
-        g.setColor(Cor.PRETO);
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+        //Contornos
+        g.setColor(Cor.CINZA_ESCURO);
+        g.drawLine(inicioLargura, inicioAltura - 1, fimLargura - 3, inicioAltura - 1);
+        g.drawLine(fimLargura - 3, inicioAltura, fimLargura - 3, fimAltura);
 
         //Eixo X
-        g.drawLine(inicioLargura - distCol, fimAltura, fimLargura, fimAltura);
-        g.drawLine(inicioLargura - distCol, fimAltura + 1, fimLargura, fimAltura + 1);
+        g.setColor(Cor.PRETO);
+        g.drawLine(inicioLargura - distCol + 1, fimAltura, fimLargura, fimAltura);
+        g.drawLine(inicioLargura - distCol + 1, fimAltura + 1, fimLargura, fimAltura + 1);
 
         //Eixo Y
         g.drawLine(inicioLargura, inicioAltura - distCol, inicioLargura, fimAltura + distCol);
         g.drawLine(inicioLargura + 1, inicioAltura - distCol, inicioLargura + 1, fimAltura + distCol);
     }
 
-    private void drawColumn(Graphics g) {
+    private void desenhaColuna(Graphics g) {
         acumulado = inicioLargura + distCol;
 
         for (int i = 0; i < tamValor; i++) {
@@ -184,7 +209,7 @@ public class BarChart extends Canvas implements CommandListener {
         }
     }
 
-    private void drawData(Graphics g) {
+    private void desenhaLegenda(Graphics g) {
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
         acumulado = inicioAltura;
         int tamLegenda = altura / 20;
@@ -204,7 +229,7 @@ public class BarChart extends Canvas implements CommandListener {
             erro.append("\nOs valores para o gráfico \ndevem ser positivos\n");
         }
         if (tamRotulo > 10 || tamValor > 10) {
-            erro.append("\nO tamanho maximo de valores \ndeve ser 10.\n");
+            erro.append("\nO quantidade máxima de valores \ndeve ser 10.\n");
         }
         if (tamRotulo != tamValor) {
             erro.append("\nDiferença de tamanho entre \no array do rótulo e do valor.\n");
