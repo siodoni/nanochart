@@ -11,26 +11,59 @@ public class BarChart extends Canvas implements CommandListener {
     private Chart chart;
     private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor;
-    private int cor[], posTab[] = new int[6];
-    private int valor[];
+    private int cor[], posTab[] = new int[8];
+    private int valorInt[];
+    private float valorFloat[];
+    private double valorDouble[];
     private String rotulo[];
     private String titulo;
     private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
+    private char construtor;
+    private Util util = new Util();
 
     public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo) {
         this.chart = midlet;
         this.cor = cor;
-        this.valor = valor;
+        this.valorInt = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
 
+        construtor = 'i'; //int
+        inicializa();
+    }
+
+    public BarChart(Chart midlet, int cor[], double valor[], String rotulo[], String titulo) {
+        this.chart = midlet;
+        this.cor = cor;
+        this.valorInt = util.doubleToInt(valor);
+        this.valorDouble = valor;
+        this.rotulo = rotulo;
+        this.titulo = titulo;
+
+        construtor = 'd'; //double
+        inicializa();
+    }
+
+    public BarChart(Chart midlet, int cor[], float valor[], String rotulo[], String titulo) {
+        this.chart = midlet;
+        this.cor = cor;
+        this.valorInt = util.floatToInt(valor);
+        this.valorFloat = valor;
+        this.rotulo = rotulo;
+        this.titulo = titulo;
+
+        construtor = 'f'; //float
+        inicializa();
+    }
+
+    private void inicializa() {
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         setCommandListener(this);
 
         tamRotulo = rotulo.length;
-        tamValor = valor.length;
+        tamValor = valorInt.length;
         maiorValor = getMaiorValor();
         percLargura = 5;
 
@@ -43,7 +76,7 @@ public class BarChart extends Canvas implements CommandListener {
         distCol = (largura * 2) / 100; // % entre as colunas
         acumulado = inicioLargura + distCol;
         areaTotal = fimLargura - inicioLargura;
-        larguraColuna = (areaTotal / valor.length) - distCol;
+        larguraColuna = (areaTotal / valorInt.length) - distCol;
     }
 
     protected void paint(Graphics g) {
@@ -97,13 +130,12 @@ public class BarChart extends Canvas implements CommandListener {
     }
 
     protected void pointerPressed(int x, int y) {
-        if ((x >= posTab[0] && y <= posTab[1]) || (x >= posTab[0] && y <= posTab[2])) {
-            this.grafico = true;
+        if ((x >= posTab[0] && x <= posTab[2]) && (y >= posTab[1] && y <= posTab[3])) {
+            grafico = true;
             repaint();
             serviceRepaints();
-        }
-        if ((x >= posTab[3] && y <= posTab[4]) || (x >= posTab[3] && y <= posTab[5])) {
-            this.grafico = false;
+        } else if ((x >= posTab[4] && x <= posTab[6]) && (y >= posTab[5] && y <= posTab[7])) {
+            grafico = false;
             repaint();
             serviceRepaints();
         }
@@ -111,11 +143,11 @@ public class BarChart extends Canvas implements CommandListener {
 
     private int getMaiorValor() {
         int maior = 0, valorAtual = 0;
-        for (int i = 0; i < valor.length; i++) {
-            if (valor[i] < 0) {
+        for (int i = 0; i < valorInt.length; i++) {
+            if (valorInt[i] < 0) {
                 existeNegativo = true;
             }
-            valorAtual = valor[i];
+            valorAtual = valorInt[i];
             if (valorAtual > maior) {
                 maior = valorAtual;
             }
@@ -129,6 +161,18 @@ public class BarChart extends Canvas implements CommandListener {
 
     private int getQtdePixelColuna(int valor) {
         return (valor * getTamMaxColuna()) / maiorValor;
+    }
+
+    private String getValorLegenda(int linha) {
+        String valor = "";
+        if (construtor == 'i') {
+            valor = (String.valueOf(valorInt[linha]));
+        } else if (construtor == 'd') {
+            valor = (String.valueOf(valorDouble[linha]));
+        } else if (construtor == 'f') {
+            valor = (String.valueOf(valorFloat[linha]));
+        }
+        return valor;
     }
 
     private void desenhaTabPanel(Graphics g) {
@@ -147,13 +191,16 @@ public class BarChart extends Canvas implements CommandListener {
         g.drawRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
 
         //Guardando as posições.
-        posTab[0] = tamTab;                  // X inicial
-        posTab[1] = posTab[0] + largTab;     // X final largura
-        posTab[2] = posTab[0] + altTab;      // X final altura
-
-        posTab[3] = largTab + 1;             // Y inicial
-        posTab[4] = posTab[3] + largTab - 3; // Y final largura
-        posTab[5] = posTab[3] + altTab;      // Y final altura
+        //Tab Gráfico
+        posTab[0] = 1;                       // X
+        posTab[1] = tamTab;                  // Y
+        posTab[2] = posTab[0] + largTab;     // largura
+        posTab[3] = posTab[1] + altTab;      // altura
+        //Tab Dados
+        posTab[4] = largTab + 1;             // X
+        posTab[5] = tamTab;                  // Y
+        posTab[6] = posTab[2] + largTab - 3; // largura
+        posTab[7] = posTab[5] + altTab;      // altura
 
         g.drawRect(0, altTab * 2, largura - 1, altura);
         g.setColor(Cor.BRANCO);
@@ -200,9 +247,9 @@ public class BarChart extends Canvas implements CommandListener {
             g.setColor(Cor.PRETO);
             g.drawRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
             g.setColor(Cor.CINZA);
-            g.fillRect(acumulado, inicioAltura, larguraColuna + 1, getTamMaxColuna() - getQtdePixelColuna(valor[i]));
+            g.fillRect(acumulado, inicioAltura, larguraColuna + 1, getTamMaxColuna() - getQtdePixelColuna(valorInt[i]));
             g.setColor(Cor.PRETO);
-            g.drawLine(acumulado, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])), acumulado + larguraColuna, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valor[i])));
+            g.drawLine(acumulado, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valorInt[i])), acumulado + larguraColuna, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valorInt[i])));
             acumulado += distCol + larguraColuna;
         }
     }
@@ -211,12 +258,13 @@ public class BarChart extends Canvas implements CommandListener {
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
         acumulado = inicioAltura;
         int tamLegenda = altura / 20;
+
         for (int i = 0; i < tamValor; i++) {
             g.setColor(cor[i]);
             g.fillRect(5, acumulado, tamLegenda, tamLegenda);
             g.setColor(Cor.PRETO);
             g.drawRect(5, acumulado, tamLegenda, tamLegenda);
-            g.drawString(rotulo[i] + " - " + valor[i], tamLegenda * 2, acumulado, Graphics.LEFT | Graphics.TOP);
+            g.drawString(rotulo[i] + " - " + getValorLegenda(i), tamLegenda * 2, acumulado, Graphics.LEFT | Graphics.TOP);
             acumulado += tamLegenda + distCol;
         }
         acumulado = inicioAltura;
