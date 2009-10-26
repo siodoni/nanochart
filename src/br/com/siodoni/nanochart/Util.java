@@ -9,6 +9,10 @@ import javax.microedition.lcdui.Graphics;
  */
 public class Util extends Canvas {
 
+    public Util() {
+        setFullScreenMode(false);
+    }
+
     protected void paint(Graphics g) {
     }
 }
