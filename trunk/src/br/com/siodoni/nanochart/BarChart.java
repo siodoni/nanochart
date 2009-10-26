@@ -17,7 +17,6 @@ public class BarChart extends Canvas implements CommandListener {
     private String titulo;
     private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
-    private Util util = new Util();
 
     public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo) {
         this.chart = midlet;
@@ -26,7 +25,6 @@ public class BarChart extends Canvas implements CommandListener {
         this.rotulo = rotulo;
         this.titulo = titulo;
 
-        setFullScreenMode(true);
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         setCommandListener(this);
@@ -36,8 +34,8 @@ public class BarChart extends Canvas implements CommandListener {
         maiorValor = getMaiorValor();
         percLargura = 5;
 
-        largura = util.getWidth();
-        altura = util.getHeight();
+        largura = getWidth();
+        altura = getHeight();
         inicioAltura = (altura * 23) / 100; // % no inicio do eixo Y
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
@@ -48,7 +46,7 @@ public class BarChart extends Canvas implements CommandListener {
         larguraColuna = (areaTotal / valor.length) - distCol;
     }
 
-    public void paint(Graphics g) {
+    protected void paint(Graphics g) {
         //Pinta o fundo de branco
         g.setColor(Cor.BRANCO);
         g.fillRect(0, 0, largura, altura);
