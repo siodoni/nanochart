@@ -4,7 +4,6 @@ import javax.microedition.lcdui.*;
 import javax.microedition.midlet.MIDlet;
 
 /**
- *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class Chart extends MIDlet {
@@ -17,7 +16,7 @@ public class Chart extends MIDlet {
         String rotulo[] = {"valor 01", "valor 02", "valor 03", "valor 04", "valor 05", "valor 06", "valor 07", "valor 08", "valor 09", "valor 10"};
         String titulo = "Título do gráfico de barras";
 
-        BarChart chart = new BarChart(this, cor, valor, rotulo, titulo);
+        BarChart chart = new BarChart(this, cor, valor, rotulo, titulo, BarChart.GRAFICO_BARRA);
 
         canvas = chart;
         Display.getDisplay(this).setCurrent(canvas);
