@@ -7,12 +7,12 @@ import javax.microedition.lcdui.*;
  */
 public class PieChart extends Canvas implements CommandListener {
 
-    private Chart chart;
+    private Midlet chart;
     private Command cmdSair;
     private int valor[] = {3, 4, 8, 7, 5, 2, 1, 6, 10, 9};//{10, 20, 30, 40, 50};//, 60, 70, 80, 90, 100};
     private int cor[] = {Cor.AZUL, Cor.VERDE, Cor.AMARELO, Cor.VERMELHO, Cor.ROXO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
 
-    public PieChart(Chart midlet) {
+    public PieChart(Midlet midlet) {
         setFullScreenMode(true);
         this.chart = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
