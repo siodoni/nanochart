@@ -28,7 +28,6 @@ public class BarChart extends Canvas implements CommandListener {
         this.valorInt = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
-
         construtor = 'i'; //int
         inicializa();
     }
@@ -40,7 +39,6 @@ public class BarChart extends Canvas implements CommandListener {
         this.valorDouble = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
-
         construtor = 'd'; //double
         inicializa();
     }
@@ -52,7 +50,6 @@ public class BarChart extends Canvas implements CommandListener {
         this.valorFloat = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
-
         construtor = 'f'; //float
         inicializa();
     }

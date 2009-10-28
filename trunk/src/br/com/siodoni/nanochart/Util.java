@@ -1,15 +1,10 @@
 package br.com.siodoni.nanochart;
 
-import javax.microedition.lcdui.*;
-
 /**
  *
  * @author Flavio
  */
-public class Util extends Canvas {
-
-    protected void paint(Graphics g) {
-    }
+public class Util {
 
     public int[] doubleToInt(double[] valor) {
         int tamValor = valor.length;
