@@ -3,7 +3,6 @@ package br.com.siodoni.nanochart;
 import javax.microedition.lcdui.*;
 
 /**
- *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class PieChart extends Canvas implements CommandListener {

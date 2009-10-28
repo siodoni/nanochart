@@ -3,16 +3,14 @@ package br.com.siodoni.nanochart;
 import javax.microedition.lcdui.*;
 
 /**
- *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class BarChart extends Canvas implements CommandListener {
 
     private Chart chart;
     private Command cmdSair;
-    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor;
-    private int cor[], posTab[] = new int[8];
-    private int valorInt[];
+    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor, tipoGrafico;
+    private int valorInt[], cor[], posTab[] = new int[8];
     private float valorFloat[];
     private double valorDouble[];
     private String rotulo[];
@@ -20,36 +18,39 @@ public class BarChart extends Canvas implements CommandListener {
     private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
     private char construtor;
-    private Util util = new Util();
+    public static final int GRAFICO_BARRA = 0, GRAFICO_PIZZA = 1;
 
-    public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo) {
+    public BarChart(Chart midlet, int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
         this.valorInt = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
+        this.tipoGrafico = tipoGrafico;
         construtor = 'i'; //int
         inicializa();
     }
 
-    public BarChart(Chart midlet, int cor[], double valor[], String rotulo[], String titulo) {
+    public BarChart(Chart midlet, int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
-        this.valorInt = util.doubleToInt(valor);
+        this.valorInt = Util.doubleToInt(valor);
         this.valorDouble = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
+        this.tipoGrafico = tipoGrafico;
         construtor = 'd'; //double
         inicializa();
     }
 
-    public BarChart(Chart midlet, int cor[], float valor[], String rotulo[], String titulo) {
+    public BarChart(Chart midlet, int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
-        this.valorInt = util.floatToInt(valor);
+        this.valorInt = Util.floatToInt(valor);
         this.valorFloat = valor;
         this.rotulo = rotulo;
         this.titulo = titulo;
+        this.tipoGrafico = tipoGrafico;
         construtor = 'f'; //float
         inicializa();
     }
@@ -94,10 +95,15 @@ public class BarChart extends Canvas implements CommandListener {
             desenhaTabPanel(g);
 
             if (this.grafico) {
-                //Desenhando os eixos
-                desenhaEixo(g);
-                //Desenhando as colunas
-                desenhaColuna(g);
+
+                if (this.tipoGrafico == this.GRAFICO_BARRA) {
+                    //Desenhando os eixos
+                    desenhaEixo(g);
+                    //Desenhando as colunas
+                    desenhaColuna(g);
+                } else if (this.tipoGrafico == this.GRAFICO_PIZZA) {
+                    //Desenhando o grafico de pizza
+                }
             } else {
                 //Desenhando a tabela de legenda
                 desenhaLegenda(g);

@@ -1,7 +1,6 @@
 package br.com.siodoni.nanochart;
 
 /**
- *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public interface Cor {

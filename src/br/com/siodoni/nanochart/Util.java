@@ -1,12 +1,11 @@
 package br.com.siodoni.nanochart;
 
 /**
- *
  * @author Flavio
  */
 public class Util {
 
-    public int[] doubleToInt(double[] valor) {
+    public static int[] doubleToInt(double[] valor) {
         int tamValor = valor.length;
         int[] valorInt = new int[tamValor];
         for (int i = 0; i < tamValor; i++) {
@@ -15,7 +14,7 @@ public class Util {
         return valorInt;
     }
 
-    public int[] floatToInt(float[] valor) {
+    public static int[] floatToInt(float[] valor) {
         int tamValor = valor.length;
         int[] valorInt = new int[tamValor];
         for (int i = 0; i < tamValor; i++) {
