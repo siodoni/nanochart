@@ -5,7 +5,7 @@ import javax.microedition.lcdui.*;
 /**
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class Chart extends Canvas implements CommandListener {
+public class NanoChart extends Canvas implements CommandListener {
 
     private Midlet chart;
     private Command cmdSair;
@@ -20,7 +20,7 @@ public class Chart extends Canvas implements CommandListener {
     private char construtor;
     public static final int GRAFICO_BARRA = 0, GRAFICO_PIZZA = 1;
 
-    public Chart(Midlet midlet, int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
+    public NanoChart(Midlet midlet, int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
         this.valorInt = valor;
@@ -31,7 +31,7 @@ public class Chart extends Canvas implements CommandListener {
         inicializa();
     }
 
-    public Chart(Midlet midlet, int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
+    public NanoChart(Midlet midlet, int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
         this.valorInt = Util.doubleToInt(valor);
@@ -43,7 +43,7 @@ public class Chart extends Canvas implements CommandListener {
         inicializa();
     }
 
-    public Chart(Midlet midlet, int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
+    public NanoChart(Midlet midlet, int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
         this.valorInt = Util.floatToInt(valor);
@@ -96,12 +96,12 @@ public class Chart extends Canvas implements CommandListener {
 
             if (this.grafico) {
 
-                if (this.tipoGrafico == Chart.GRAFICO_BARRA) {
+                if (this.tipoGrafico == NanoChart.GRAFICO_BARRA) {
                     //Desenhando os eixos
                     desenhaEixo(g);
                     //Desenhando as colunas
                     desenhaColuna(g);
-                } else if (this.tipoGrafico == Chart.GRAFICO_PIZZA) {
+                } else if (this.tipoGrafico == NanoChart.GRAFICO_PIZZA) {
                     //Desenhando o grafico de pizza
                     desenhaPizza(g);
                 }
