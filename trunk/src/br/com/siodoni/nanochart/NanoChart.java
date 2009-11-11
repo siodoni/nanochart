@@ -89,7 +89,7 @@ public class NanoChart extends Canvas implements CommandListener {
             //Desenhando o titulo
             g.setColor(Cor.PRETO);
             g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_LARGE));
-            g.drawString(titulo, inicioLargura, distCol, Graphics.LEFT | Graphics.TOP);
+            g.drawString(titulo, largura / 2, distCol, Graphics.HCENTER | Graphics.TOP);
 
             //Desenhando a tabpanel
             desenhaTabPanel(g);
