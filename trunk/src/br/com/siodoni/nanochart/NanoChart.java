@@ -275,27 +275,38 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     private void desenhaPizza(Graphics g) {
-        int anguloAcumulado = 0;
-        int soma = 0;
-        int angulo = 0;
+        int anguloAcumulado = 0, soma = 0, angulo = 0, posicao = 0;
+        int valorAngulo[] = new int[tamValor];
+
         for (int i = 0; i < tamValor; i++) {
             soma += valorInt[i];
         }
 
-        //Problema no arredondamento...
         for (int i = 0; i < tamValor; i++) {
             angulo = (soma / valorInt[i]);
-            angulo = 360 / angulo;
-            g.setColor(cor[i]);
-            g.fillArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, anguloAcumulado, angulo);
-            g.setColor(Cor.PRETO);
-            anguloAcumulado += angulo;
+            valorAngulo[i] = 360 / angulo;
+            if (valorInt[i] == getMaiorValor()) {
+                posicao = i;
+            }
+        }
 
-            System.out.println(
-                    "sequencia " + i +
-                    " valor " + valorInt[i] +
-                    " angulo " + angulo +
-                    " acumulado " + anguloAcumulado);
+        soma = 0;
+
+        for (int i = 0; i < tamValor; i++) {
+            soma += valorAngulo[i];
+        }
+
+        if (soma > 360) {
+            valorAngulo[posicao] -= (soma - 360);
+        } else if (soma < 360) {
+            valorAngulo[posicao] += Math.abs(soma - 360);
+        }
+
+        for (int i = 0; i < tamValor; i++) {
+            g.setColor(cor[i]);
+            g.fillArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, anguloAcumulado, valorAngulo[i]);
+            g.setColor(Cor.PRETO);
+            anguloAcumulado += valorAngulo[i];
         }
         g.setColor(Cor.PRETO);
         g.drawArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, 0, 360);
