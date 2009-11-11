@@ -15,15 +15,15 @@ public class Midlet extends MIDlet {
     public void startApp() {
 
         int cor[] = {Cor.AZUL, Cor.VERDE, Cor.AMARELO, Cor.VERMELHO, Cor.ROXO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
-        int valor[] = new int[10];
+        int valor[] = {3, 4, 8, 7, 5, 2, 1, 6, 10, 9};//new int[10];
         String rotulo[] = new String[valor.length];
         String titulo = "Título";
         for (int i = 0; i < valor.length; i++) {
-            valor[i] = random.nextInt(30) + 1;
+            //valor[i] = random.nextInt(30) + 1;
             rotulo[i] = "valor " + (i + 1);
         }
 
-        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_BARRA);
+        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_PIZZA);
 
         canvas = nanoChart;
         Display.getDisplay(this).setCurrent(canvas);

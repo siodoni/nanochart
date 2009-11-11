@@ -275,8 +275,30 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     private void desenhaPizza(Graphics g) {
-        g.setColor(Cor.AZUL);
-        g.fillArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, 0, 360);
+        int anguloAcumulado = 0;
+        int soma = 0;
+        int angulo = 0;
+        for (int i = 0; i < tamValor; i++) {
+            soma += valorInt[i];
+        }
+
+        //Problema no arredondamento...
+        for (int i = 0; i < tamValor; i++) {
+            angulo = (soma / valorInt[i]);
+            angulo = 360 / angulo;
+            g.setColor(cor[i]);
+            g.fillArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, anguloAcumulado, angulo);
+            g.setColor(Cor.PRETO);
+            anguloAcumulado += angulo;
+
+            System.out.println(
+                    "sequencia " + i +
+                    " valor " + valorInt[i] +
+                    " angulo " + angulo +
+                    " acumulado " + anguloAcumulado);
+        }
+        g.setColor(Cor.PRETO);
+        g.drawArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, 0, 360);
     }
 
     private void validaInformacoes(Graphics g) {
