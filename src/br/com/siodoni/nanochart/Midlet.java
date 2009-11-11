@@ -16,11 +16,11 @@ public class Midlet extends MIDlet {
 
         int cor[] = {Cor.AZUL, Cor.VERDE, Cor.AMARELO, Cor.VERMELHO, Cor.ROXO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
         int valor[] = new int[10];
-        String rotulo[] = {"valor 01", "valor 02", "valor 03", "valor 04", "valor 05", "valor 06", "valor 07", "valor 08", "valor 09", "valor 10"};
-        String titulo = "Título do gráfico de barras";
-
-        for (int i = 0; i < 9; i++) {
-            valor[i] = random.nextInt(15) + 1;
+        String rotulo[] = new String[valor.length];
+        String titulo = "Título";
+        for (int i = 0; i < valor.length; i++) {
+            valor[i] = random.nextInt(30) + 1;
+            rotulo[i] = "valor " + (i + 1);
         }
 
         NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_BARRA);
