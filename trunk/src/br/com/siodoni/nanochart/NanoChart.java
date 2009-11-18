@@ -275,7 +275,7 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     private void desenhaPizza(Graphics g) {
-        int anguloAcumulado = 0, soma = 0, angulo = 0, posicao = 0;
+        int anguloAcumulado = 0, soma = 0, angulo = 0, posicaoMaiorVlr = 0;
         int valorAngulo[] = new int[tamValor];
 
         for (int i = 0; i < tamValor; i++) {
@@ -286,7 +286,7 @@ public class NanoChart extends Canvas implements CommandListener {
             angulo = (soma / valorInt[i]);
             valorAngulo[i] = 360 / angulo;
             if (valorInt[i] == getMaiorValor()) {
-                posicao = i;
+                posicaoMaiorVlr = i;
             }
         }
 
@@ -297,9 +297,9 @@ public class NanoChart extends Canvas implements CommandListener {
         }
 
         if (soma > 360) {
-            valorAngulo[posicao] -= (soma - 360);
+            valorAngulo[posicaoMaiorVlr] -= (soma - 360);
         } else if (soma < 360) {
-            valorAngulo[posicao] += Math.abs(soma - 360);
+            valorAngulo[posicaoMaiorVlr] += Math.abs(soma - 360);
         }
 
         for (int i = 0; i < tamValor; i++) {
