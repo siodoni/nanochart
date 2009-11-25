@@ -3,6 +3,8 @@ package br.com.siodoni.nanochart;
 import javax.microedition.lcdui.*;
 
 /**
+ *
+ * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class NanoChart extends Canvas implements CommandListener {
@@ -67,7 +69,8 @@ public class NanoChart extends Canvas implements CommandListener {
 
         largura = getWidth();
         altura = getHeight();
-        inicioAltura = (altura * 23) / 100; // % no inicio do eixo Y
+        //TODO inicioAltura precisa ser melhorado...
+        inicioAltura = ((altura * 23) / 100) + (largura / 32); // % no inicio do eixo Y
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
         fimLargura = largura - inicioLargura;
@@ -183,10 +186,10 @@ public class NanoChart extends Canvas implements CommandListener {
         int tamTab = largura / 7, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
 
         if (grafico) {
-            g.setColor(Cor.CINZA);
+            g.setColor(Cor.CINZA1);
             g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
         } else {
-            g.setColor(Cor.CINZA);
+            g.setColor(Cor.CINZA1);
             g.fillRoundRect(1, tamTab, largTab, altTab, angTab, angTab);
         }
 
@@ -224,11 +227,11 @@ public class NanoChart extends Canvas implements CommandListener {
 
     private void desenhaEixo(Graphics g) {
         //Fundo
-        g.setColor(Cor.CINZA);
+        g.setColor(Cor.CINZA1);
         g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura - 2, fimAltura - inicioAltura);
 
         //Contornos
-        g.setColor(Cor.CINZA_ESCURO);
+        g.setColor(Cor.CINZA3);
         g.drawLine(inicioLargura, inicioAltura - 1, fimLargura - 3, inicioAltura - 1);
         g.drawLine(fimLargura - 3, inicioAltura, fimLargura - 3, fimAltura);
 
@@ -250,28 +253,12 @@ public class NanoChart extends Canvas implements CommandListener {
             g.fillRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
             g.setColor(Cor.PRETO);
             g.drawRect(acumulado, inicioAltura, larguraColuna, fimAltura - inicioAltura);
-            g.setColor(Cor.CINZA);
+            g.setColor(Cor.CINZA1);
             g.fillRect(acumulado, inicioAltura, larguraColuna + 1, getTamMaxColuna() - getQtdePixelColuna(valorInt[i]));
             g.setColor(Cor.PRETO);
             g.drawLine(acumulado, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valorInt[i])), acumulado + larguraColuna, inicioAltura + (getTamMaxColuna() - getQtdePixelColuna(valorInt[i])));
             acumulado += distCol + larguraColuna;
         }
-    }
-
-    private void desenhaLegenda(Graphics g) {
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
-        acumulado = inicioAltura;
-        int tamLegenda = altura / 20;
-
-        for (int i = 0; i < tamValor; i++) {
-            g.setColor(cor[i]);
-            g.fillRect(5, acumulado, tamLegenda, tamLegenda);
-            g.setColor(Cor.PRETO);
-            g.drawRect(5, acumulado, tamLegenda, tamLegenda);
-            g.drawString(rotulo[i] + " - " + getValorLegenda(i), tamLegenda * 2, acumulado, Graphics.LEFT | Graphics.TOP);
-            acumulado += tamLegenda + distCol;
-        }
-        acumulado = inicioAltura;
     }
 
     private void desenhaPizza(Graphics g) {
@@ -292,6 +279,7 @@ public class NanoChart extends Canvas implements CommandListener {
 
         soma = 0;
 
+        //TODO melhorar essa parte pois o maior valor está sendo alterado arbitrariamente, deverá ser feito um rateio.
         for (int i = 0; i < tamValor; i++) {
             soma += valorAngulo[i];
         }
@@ -310,6 +298,22 @@ public class NanoChart extends Canvas implements CommandListener {
         }
         g.setColor(Cor.PRETO);
         g.drawArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, 0, 360);
+    }
+
+    private void desenhaLegenda(Graphics g) {
+        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+        acumulado = inicioAltura;
+        int tamLegenda = altura / 20;
+
+        for (int i = 0; i < tamValor; i++) {
+            g.setColor(cor[i]);
+            g.fillRect(5, acumulado, tamLegenda, tamLegenda);
+            g.setColor(Cor.PRETO);
+            g.drawRect(5, acumulado, tamLegenda, tamLegenda);
+            g.drawString(rotulo[i] + " - " + getValorLegenda(i), tamLegenda * 2, acumulado, Graphics.LEFT | Graphics.TOP);
+            acumulado += tamLegenda + distCol;
+        }
+        acumulado = inicioAltura;
     }
 
     private void validaInformacoes(Graphics g) {

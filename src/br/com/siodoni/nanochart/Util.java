@@ -1,7 +1,9 @@
 package br.com.siodoni.nanochart;
 
 /**
- * @author Flavio
+ *
+ * @version 1.0
+ * @author Flavio Augusto Siodoni Ximenes
  */
 public class Util {
 
