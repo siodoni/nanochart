@@ -5,6 +5,7 @@ import javax.microedition.midlet.MIDlet;
 import java.util.Random;
 
 /**
+ *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class Midlet extends MIDlet {
@@ -14,7 +15,7 @@ public class Midlet extends MIDlet {
 
     public void startApp() {
 
-        int cor[] = {Cor.AZUL, Cor.VERDE, Cor.AMARELO, Cor.VERMELHO, Cor.ROXO, Cor.AZUL_ESCURO, Cor.VERDE_ESCURO, Cor.AMARELO_ESCURO, Cor.VERMELHO_ESCURO, Cor.ROXO_ESCURO};
+        int cor[] = {Cor.VERMELHO2, Cor.VERDE2, Cor.AMARELO2, Cor.AZUL2, Cor.ROXO2, Cor.VERMELHO3, Cor.VERDE3, Cor.AMARELO3, Cor.AZUL3, Cor.ROXO3};
         int valor[] = new int[10];
         String rotulo[] = new String[valor.length];
         String titulo = "Título";
@@ -23,7 +24,7 @@ public class Midlet extends MIDlet {
             rotulo[i] = "valor " + (i + 1);
         }
 
-        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_PIZZA);
+        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_BARRA);
 
         canvas = nanoChart;
         Display.getDisplay(this).setCurrent(canvas);
