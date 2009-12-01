@@ -3,7 +3,7 @@ package br.com.siodoni.nanochart;
 import javax.microedition.lcdui.*;
 
 /**
- *
+ * //TODO melhorar a documentação da classe NanoChart
  * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
@@ -20,8 +20,24 @@ public class NanoChart extends Canvas implements CommandListener {
     private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
     private char construtor;
-    public static final int GRAFICO_BARRA = 0, GRAFICO_PIZZA = 1;
+    /**
+     * //TODO melhorar a documentação aqui...
+     */
+    public static final int GRAFICO_BARRA = 0;
+    /**
+     * //TODO melhorar a documentação aqui...
+     */
+    public static final int GRAFICO_PIZZA = 1;
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param midlet
+     * @param cor
+     * @param valor
+     * @param rotulo
+     * @param titulo
+     * @param tipoGrafico
+     */
     public NanoChart(Midlet midlet, int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
@@ -33,6 +49,15 @@ public class NanoChart extends Canvas implements CommandListener {
         inicializa();
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param midlet
+     * @param cor
+     * @param valor
+     * @param rotulo
+     * @param titulo
+     * @param tipoGrafico
+     */
     public NanoChart(Midlet midlet, int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
@@ -45,6 +70,15 @@ public class NanoChart extends Canvas implements CommandListener {
         inicializa();
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param midlet
+     * @param cor
+     * @param valor
+     * @param rotulo
+     * @param titulo
+     * @param tipoGrafico
+     */
     public NanoChart(Midlet midlet, int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.chart = midlet;
         this.cor = cor;
@@ -57,6 +91,9 @@ public class NanoChart extends Canvas implements CommandListener {
         inicializa();
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     */
     private void inicializa() {
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
@@ -80,6 +117,10 @@ public class NanoChart extends Canvas implements CommandListener {
         larguraColuna = (areaTotal / valorInt.length) - distCol;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     protected void paint(Graphics g) {
         //Pinta o fundo de branco
         g.setColor(Cor.BRANCO);
@@ -116,12 +157,21 @@ public class NanoChart extends Canvas implements CommandListener {
         }
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param c
+     * @param d
+     */
     public void commandAction(Command c, Displayable d) {
         if (c == cmdSair) {
             chart.destroyApp(false);
         }
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param keyCode
+     */
     protected void keyPressed(int keyCode) {
         int tecla = getGameAction(keyCode);
 
@@ -136,6 +186,11 @@ public class NanoChart extends Canvas implements CommandListener {
         }
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param x
+     * @param y
+     */
     protected void pointerPressed(int x, int y) {
         if ((x >= posTab[0] && x <= posTab[2]) && (y >= posTab[1] && y <= posTab[3])) {
             grafico = true;
@@ -148,6 +203,10 @@ public class NanoChart extends Canvas implements CommandListener {
         }
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @return
+     */
     private int getMaiorValor() {
         int maior = 0, valorAtual = 0;
         for (int i = 0; i < valorInt.length; i++) {
@@ -162,14 +221,28 @@ public class NanoChart extends Canvas implements CommandListener {
         return maior;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @return
+     */
     private int getTamMaxColuna() {
         return fimAltura - inicioAltura;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param valor
+     * @return
+     */
     private int getQtdePixelColuna(int valor) {
         return (valor * getTamMaxColuna()) / maiorValor;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param linha
+     * @return
+     */
     private String getValorLegenda(int linha) {
         String valor = "";
         if (construtor == 'i') {
@@ -182,6 +255,10 @@ public class NanoChart extends Canvas implements CommandListener {
         return valor;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void desenhaTabPanel(Graphics g) {
         int tamTab = largura / 7, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
 
@@ -225,6 +302,10 @@ public class NanoChart extends Canvas implements CommandListener {
         g.drawString(" Dados", largTab + distCol, tamTab + distCol, Graphics.LEFT | Graphics.TOP);
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void desenhaEixo(Graphics g) {
         //Fundo
         g.setColor(Cor.CINZA1);
@@ -245,6 +326,10 @@ public class NanoChart extends Canvas implements CommandListener {
         g.drawLine(inicioLargura + 1, inicioAltura - distCol, inicioLargura + 1, fimAltura + distCol);
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void desenhaColuna(Graphics g) {
         acumulado = inicioLargura + distCol;
 
@@ -261,6 +346,10 @@ public class NanoChart extends Canvas implements CommandListener {
         }
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void desenhaPizza(Graphics g) {
         int anguloAcumulado = 0, soma = 0, angulo = 0, posicaoMaiorVlr = 0;
         int valorAngulo[] = new int[tamValor];
@@ -300,6 +389,10 @@ public class NanoChart extends Canvas implements CommandListener {
         g.drawArc(inicioLargura, inicioAltura, fimLargura - inicioLargura, fimLargura - inicioLargura, 0, 360);
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void desenhaLegenda(Graphics g) {
         g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
         acumulado = inicioAltura;
@@ -316,6 +409,10 @@ public class NanoChart extends Canvas implements CommandListener {
         acumulado = inicioAltura;
     }
 
+    /**
+     * //TODO melhorar a documentação aqui...
+     * @param g
+     */
     private void validaInformacoes(Graphics g) {
         if (existeNegativo) {
             erro.append("\nOs valores para o gráfico \ndevem ser positivos\n");
