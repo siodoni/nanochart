@@ -21,11 +21,11 @@ public class NanoChart extends Canvas implements CommandListener {
     private boolean grafico = true, validado = false, existeNegativo = false;
     private char construtor;
     /**
-     * //TODO melhorar a documentação aqui...
+     * Constante para o tipo de grafico de barra - valor <code>0</code>
      */
     public static final int GRAFICO_BARRA = 0;
     /**
-     * //TODO melhorar a documentação aqui...
+     * Constante para o tipo de grafico de pizza - valor <code>1</code>
      */
     public static final int GRAFICO_PIZZA = 1;
 
