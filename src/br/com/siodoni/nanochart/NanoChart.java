@@ -3,7 +3,7 @@ package br.com.siodoni.nanochart;
 import javax.microedition.lcdui.*;
 
 /**
- * //TODO melhorar a documentação da classe NanoChart
+ * //TODO melhorar a documentação aqui...
  * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
@@ -106,7 +106,7 @@ public class NanoChart extends Canvas implements CommandListener {
 
         largura = getWidth();
         altura = getHeight();
-        //TODO inicioAltura precisa ser melhorado...
+        //TODO inicioAltura precisa ser melhorado, pois em alguns aparelhos o inicio do grafico está sobrepondo as tabs...
         inicioAltura = ((altura * 23) / 100) + (largura / 32); // % no inicio do eixo Y
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
