@@ -1,14 +1,14 @@
 package br.com.siodoni.nanochart;
 
 /**
- * //TODO melhorar a documentação da classe Util
+ * //TODO melhorar a documentação aqui...
  * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class Util {
 
     /**
-     * //TODO documentar o metodo Util.doubleToInt
+     * //TODO melhorar a documentação aqui...
      * @param valor
      * @return int[]
      */
@@ -22,7 +22,7 @@ public class Util {
     }
 
     /**
-     * //TODO documentar o metodo Util.doubleToInt
+     * //TODO melhorar a documentação aqui...
      * @param valor
      * @return int[]
      */

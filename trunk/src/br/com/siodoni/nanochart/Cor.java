@@ -1,7 +1,7 @@
 package br.com.siodoni.nanochart;
 
 /**
- * //TODO melhorar a documentação da interface Cor
+ * //TODO melhorar a documentação aqui...
  * A intensidade da cor segue o seguinte padrão:
  * 
  * <ul>
