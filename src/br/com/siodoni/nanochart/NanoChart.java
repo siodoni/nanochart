@@ -394,7 +394,7 @@ public class NanoChart extends Canvas implements CommandListener {
      * @param g
      */
     private void desenhaLegenda(Graphics g) {
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
         acumulado = inicioAltura;
         int tamLegenda = altura / 20;
 
