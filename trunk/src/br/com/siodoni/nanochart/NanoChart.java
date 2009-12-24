@@ -13,6 +13,7 @@ public class NanoChart extends Canvas implements CommandListener {
     private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor, tipoGrafico;
     private int valorInt[], cor[], posTab[] = new int[8];
+    private int tamTab, altTab, largTab, angTab;
     private float valorFloat[];
     private double valorDouble[];
     private String rotulo[];
@@ -20,6 +21,9 @@ public class NanoChart extends Canvas implements CommandListener {
     private StringBuffer erro = new StringBuffer();
     private boolean grafico = true, validado = false, existeNegativo = false;
     private char construtor;
+    private Font fontePeq = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+    private Font fonteMed = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
+    private Font fonteGde = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE);
     /**
      * Constante para o tipo de grafico de barra - valor <code>0</code>
      */
@@ -98,6 +102,7 @@ public class NanoChart extends Canvas implements CommandListener {
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         setCommandListener(this);
+        setFullScreenMode(true);
 
         tamRotulo = rotulo.length;
         tamValor = valorInt.length;
@@ -107,7 +112,7 @@ public class NanoChart extends Canvas implements CommandListener {
         largura = getWidth();
         altura = getHeight();
         //TODO inicioAltura precisa ser melhorado, pois em alguns aparelhos o inicio do grafico está sobrepondo as tabs...
-        inicioAltura = ((altura * 23) / 100) + (largura / 32); // % no inicio do eixo Y
+        inicioAltura = ((altura * 25) / 100) + (largura / 32); // % no inicio do eixo Y
         inicioLargura = (largura * percLargura) / 100; // % no inicio do eixo X
         fimAltura = (altura - inicioLargura);
         fimLargura = largura - inicioLargura;
@@ -115,6 +120,12 @@ public class NanoChart extends Canvas implements CommandListener {
         acumulado = inicioLargura + distCol;
         areaTotal = fimLargura - inicioLargura;
         larguraColuna = (areaTotal / valorInt.length) - distCol;
+
+        //Definindo os tamanhos da tab.
+        tamTab = largura / 7;
+        altTab = largura / 8;
+        largTab = largura / 2;
+        angTab = largura / 20;
     }
 
     /**
@@ -132,7 +143,7 @@ public class NanoChart extends Canvas implements CommandListener {
         if (validado) {
             //Desenhando o titulo
             g.setColor(Cor.PRETO);
-            g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_LARGE));
+            g.setFont(fonteGde);
             g.drawString(titulo, largura / 2, distCol, Graphics.HCENTER | Graphics.TOP);
 
             //Desenhando a tabpanel
@@ -260,8 +271,6 @@ public class NanoChart extends Canvas implements CommandListener {
      * @param g
      */
     private void desenhaTabPanel(Graphics g) {
-        int tamTab = largura / 7, altTab = largura / 8, largTab = largura / 2, angTab = largura / 20;
-
         if (grafico) {
             g.setColor(Cor.CINZA1);
             g.fillRoundRect(largTab + 1, tamTab, largTab - 3, altTab, angTab, angTab);
@@ -297,7 +306,7 @@ public class NanoChart extends Canvas implements CommandListener {
 
         g.fillRect(1, (altTab * 2) + 1, largura - 2, altura);
         g.setColor(Cor.PRETO);
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+        g.setFont(fontePeq);
         g.drawString(" Gráfico", distCol, tamTab + distCol, Graphics.LEFT | Graphics.TOP);
         g.drawString(" Dados", largTab + distCol, tamTab + distCol, Graphics.LEFT | Graphics.TOP);
     }
@@ -394,9 +403,9 @@ public class NanoChart extends Canvas implements CommandListener {
      * @param g
      */
     private void desenhaLegenda(Graphics g) {
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+        g.setFont(fontePeq);
         acumulado = inicioAltura;
-        int tamLegenda = altura / 20;
+        int tamLegenda = fontePeq.getHeight();//altura / 20;
 
         for (int i = 0; i < tamValor; i++) {
             g.setColor(cor[i]);
@@ -431,7 +440,7 @@ public class NanoChart extends Canvas implements CommandListener {
         if (!validado) {
             erro.insert(0, "Erro na montagem do gráfico!\n");
             g.setColor(Cor.PRETO);
-            g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+            g.setFont(fonteMed);
             g.drawString(erro.toString(), 0, 0, Graphics.LEFT | Graphics.TOP);
         }
     }

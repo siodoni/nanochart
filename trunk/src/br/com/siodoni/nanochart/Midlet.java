@@ -24,7 +24,7 @@ public class Midlet extends MIDlet {
             rotulo[i] = "valor " + (i + 1);
         }
 
-        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_BARRA);
+        NanoChart nanoChart = new NanoChart(this, cor, valor, rotulo, titulo, NanoChart.GRAFICO_PIZZA);
 
         canvas = nanoChart;
         Display.getDisplay(this).setCurrent(canvas);
