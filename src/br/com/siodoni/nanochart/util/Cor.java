@@ -1,13 +1,20 @@
-package br.com.siodoni.nanochart;
+package br.com.siodoni.nanochart.util;
 
 /**
- * //TODO melhorar a documentação aqui...
+ * Interface responsavel por fornecer os codigos hexadecimais das cores.<br/>
  * A intensidade da cor segue o seguinte padrão:
- * 
  * <ul>
  *   <li>1 - claro</li>
  *   <li>2 - médio</li>
  *   <li>3 - escuro</li>
+ * </ul>
+ * Caso a cor desejada não esteja presente na interface, é possivel utilizar
+ * o codigo RGB (Red, Green, Blue) hexadecimal, o mesmo padrão utilizado para paginas em html.<br/>
+ * Exemplo:<br/>
+ * Cor branco
+ * <ul>
+ *   <li>Código hexadecimal para página html: #FFFFFF</li>
+ *   <li>Código hexadecimal para o NanoChart: 0x00FFFFFF</li>
  * </ul>
  *
  * @version 1.0
