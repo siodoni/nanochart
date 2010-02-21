@@ -2,23 +2,71 @@ package br.com.siodoni.nanochart;
 
 import br.com.siodoni.nanochart.util.Util;
 import br.com.siodoni.nanochart.util.Cor;
-import br.com.siodoni.nanochart.midlet.Midlet;
 import javax.microedition.lcdui.Canvas;
-import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.midlet.MIDlet;
 
 /**
- * TODO 01-melhorar a documentação aqui...
+ * Classe responsável por montar o grafico de barra ou pizza de acordo com as
+ * informações recebidas pelos 3 construtores disponíveis.<br/>
+ * Exemplo de uma MIDlet utilizando o NanoChart.
+ * <blockquote>
+ * <pre>
+ * import br.com.siodoni.nanochart.util.Cor;
+ * import br.com.siodoni.nanochart.NanoChart;
+ * import javax.microedition.midlet.MIDlet;
+ * import java.util.Random;
+ * import javax.microedition.lcdui.Display;
+ * 
+ * public class Midlet extends MIDlet implements Cor {
+ *
+ *     public void startApp() {
+ *         //Atributo responsavel por gerar valores aleatórios para o exemplo.
+ *         Random random = new Random();
+ *
+ *         //Array de cores que será utilizada para a montagem do gráfico.
+ *         int cor[] = {VERMELHO2, VERDE2, AMARELO2, AZUL2, ROXO2, VERMELHO3, VERDE3, AMARELO3, AZUL3, ROXO3};
+ *
+ *         //Array de valores que será utilizado para a montagem do gráfico de exemplo.
+ *         int valor[] = new int[10];
+ *
+ *         //Array de rotulos que será utilizado para a montagem das legendas do gráfico de exemplo.
+ *         String rotulo[] = new String[valor.length];
+ *
+ *         //Título do gráfico de exemplo.
+ *         String titulo = "Exemplo de gráfico aleatório";
+ *
+ *         //Tipo de gráfico utilizado. Podendo ser GRAFICO_BARRA ou GRAFICO_PIZZA.
+ *         int tpGrafico = NanoChart.GRAFICO_PIZZA;
+ *
+ *         //Montando de forma aleatória os valores e as legendas.
+ *         for (int i = 0; i < valor.length; i++) {
+ *             valor[i] = random.nextInt(50) + 1;
+ *             rotulo[i] = "valor aleatório";
+ *         }
+ *
+ *         //Instanciando o atributo nanoChart de acordo com as informações fornecidas.
+ *         NanoChart nanoChart = new NanoChart(cor, valor, rotulo, titulo, tpGrafico);
+ *
+ *         //Solicitando ao Display que mostre o grafico de acordo com as informações fornecidas.
+ *         Display.getDisplay(this).setCurrent(nanoChart);
+ *     }
+ *
+ *     public void pauseApp() {
+ *     }
+ *
+ *     public void destroyApp(boolean unconditional) {
+ *         notifyDestroyed();
+ *     }
+ * }
+ * </pre>
+ * </blockquote>
  * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
-public class NanoChart extends Canvas implements CommandListener {
+public class NanoChart extends Canvas {
 
-    private Midlet chart;
-    private Command cmdSair;
     private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor, tipoGrafico;
     private int valorInt[], cor[], posTab[] = new int[8];
     private int tamTab, altTab, largTab, angTab;
@@ -46,16 +94,15 @@ public class NanoChart extends Canvas implements CommandListener {
     private static final int QTDE_MAX_VALOR = 10;
 
     /**
-     * TODO 02-melhorar a documentação aqui...
-     * @param midlet
-     * @param cor
-     * @param valor
-     * @param rotulo
-     * @param titulo
-     * @param tipoGrafico
+     * Construtor da classe NanoChart para valores int.
+     * @param cor informe o array de cores para a montagem do grafico.
+     * @param valor informe o array de valores para a montagem do grafico.
+     * @param rotulo informe o array de rotulos para a montagem do grafico.
+     * @param titulo informe o titulo do grafico.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @see br.com.siodoni.nanochart.util.Cor
      */
-    public NanoChart(Midlet midlet, int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
-        this.chart = midlet;
+    public NanoChart(int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.cor = cor;
         this.valorInt = valor;
         this.rotulo = rotulo;
@@ -66,16 +113,15 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 03-melhorar a documentação aqui...
-     * @param midlet
-     * @param cor
-     * @param valor
-     * @param rotulo
-     * @param titulo
-     * @param tipoGrafico
+     * Construtor da classe NanoChart para valores double.
+     * @param cor informe o array de cores para a montagem do grafico.
+     * @param valor informe o array de valores para a montagem do grafico.
+     * @param rotulo informe o array de rotulos para a montagem do grafico.
+     * @param titulo informe o titulo do grafico.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @see br.com.siodoni.nanochart.util.Cor
      */
-    public NanoChart(Midlet midlet, int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
-        this.chart = midlet;
+    public NanoChart(int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.cor = cor;
         this.valorInt = Util.doubleParaInt(valor);
         this.valorDouble = valor;
@@ -87,16 +133,15 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 04-melhorar a documentação aqui...
-     * @param midlet
-     * @param cor
-     * @param valor
-     * @param rotulo
-     * @param titulo
-     * @param tipoGrafico
+     * Construtor da classe NanoChart para valores float.
+     * @param cor informe o array de cores para a montagem do grafico.
+     * @param valor informe o array de valores para a montagem do grafico.
+     * @param rotulo informe o array de rotulos para a montagem do grafico.
+     * @param titulo informe o titulo do grafico.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @see br.com.siodoni.nanochart.util.Cor
      */
-    public NanoChart(Midlet midlet, int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
-        this.chart = midlet;
+    public NanoChart(int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
         this.cor = cor;
         this.valorInt = Util.floatParaInt(valor);
         this.valorFloat = valor;
@@ -108,12 +153,10 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 05-melhorar a documentação aqui...
+     * Método responsavel por inicializar todas os atributos que serão
+     * utilizados para a montagem do gráfico.
      */
     private void inicializa() {
-        cmdSair = new Command("Sair", Command.EXIT, 0);
-        addCommand(cmdSair);
-        setCommandListener(this);
         setFullScreenMode(true);
 
         tamRotulo = rotulo.length;
@@ -141,7 +184,7 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 06-melhorar a documentação aqui...
+     * Método responsável por "desenhar" o gráfico na tela do aparelho móvel.
      * @param g instancia para a classe Graphics.
      */
     protected void paint(Graphics g) {
@@ -181,18 +224,7 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 07-melhorar a documentação aqui...
-     * @param c
-     * @param d
-     */
-    public void commandAction(Command c, Displayable d) {
-        if (c == cmdSair) {
-            chart.destroyApp(false);
-        }
-    }
-
-    /**
-     * TODO 08-melhorar a documentação aqui...
+     * Método responsavel pela navegação das abas do NanoChart pelo teclado.
      * @param keyCode
      */
     protected void keyPressed(int keyCode) {
@@ -210,9 +242,9 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 09-melhorar a documentação aqui...
-     * @param x
-     * @param y
+     * Método responsavel pela navegação das abas do NanoChart pelo tela touch screen.
+     * @param x localização no eixo x da tela.
+     * @param y localização no eixo y da tela.
      */
     protected void pointerPressed(int x, int y) {
         if ((x >= posTab[0] && x <= posTab[2]) && (y >= posTab[1] && y <= posTab[3])) {
@@ -227,8 +259,8 @@ public class NanoChart extends Canvas implements CommandListener {
     }
 
     /**
-     * TODO 10-melhorar a documentação aqui...
-     * @return
+     * Método responsável por retornar o maior valor do array de valores.
+     * @return maior valor do array de valores.
      */
     private int getMaiorValor() {
         int maior = 0, valorAtual = 0;
@@ -392,11 +424,11 @@ public class NanoChart extends Canvas implements CommandListener {
 
         soma = 0;
 
-        //TODO *** melhorar essa parte pois o maior valor está sendo alterado arbitrariamente, deverá ser feito um rateio.
         for (int i = 0; i < tamValor; i++) {
             soma += valorAngulo[i];
         }
 
+        //TODO *** melhorar essa parte pois o maior valor está sendo alterado arbitrariamente, deverá ser feito um rateio.
         if (soma > 360) {
             valorAngulo[posicaoMaiorVlr] -= (soma - 360);
         } else if (soma < 360) {
@@ -463,6 +495,26 @@ public class NanoChart extends Canvas implements CommandListener {
             g.setColor(Cor.PRETO);
             g.setFont(fonteMed);
             g.drawString(erro.toString(), 0, 0, Graphics.LEFT | Graphics.TOP);
+        }
+    }
+
+    /**
+     * 
+     */
+    private class Sair extends MIDlet {
+
+        protected void startApp() {
+        }
+
+        protected void pauseApp() {
+        }
+
+        protected void destroyApp(boolean unconditional) {
+            try {
+                notifyDestroyed();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
