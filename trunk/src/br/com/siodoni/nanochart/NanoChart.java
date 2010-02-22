@@ -62,6 +62,7 @@ import javax.microedition.midlet.MIDlet;
  * }
  * </pre>
  * </blockquote>
+ *
  * @version 1.0
  * @author Flavio Augusto Siodoni Ximenes
  */
@@ -95,11 +96,12 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores int.
+	 *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
      * @param titulo informe o titulo do grafico.
-     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser <code>NanoChart.GRAFICO_BARRA</code> ou <code>NanoChart.GRAFICO_PIZZA</code>.
      * @see br.com.siodoni.nanochart.util.Cor
      */
     public NanoChart(int cor[], int valor[], String rotulo[], String titulo, int tipoGrafico) {
@@ -114,11 +116,12 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores double.
+	 *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
      * @param titulo informe o titulo do grafico.
-     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser <code>NanoChart.GRAFICO_BARRA</code> ou <code>NanoChart.GRAFICO_PIZZA</code>.
      * @see br.com.siodoni.nanochart.util.Cor
      */
     public NanoChart(int cor[], double valor[], String rotulo[], String titulo, int tipoGrafico) {
@@ -134,11 +137,12 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores float.
+	 *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
      * @param titulo informe o titulo do grafico.
-     * @param tipoGrafico informe o tipo de grafico, podendo ser NanoChart.GRAFICO_BARRA ou NanoChart.GRAFICO_PIZZA.
+     * @param tipoGrafico informe o tipo de grafico, podendo ser <code>NanoChart.GRAFICO_BARRA</code> ou <code>NanoChart.GRAFICO_PIZZA</code>.
      * @see br.com.siodoni.nanochart.util.Cor
      */
     public NanoChart(int cor[], float valor[], String rotulo[], String titulo, int tipoGrafico) {
@@ -185,6 +189,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por "desenhar" o gráfico na tela do aparelho móvel.
+	 *
      * @param g instancia para a classe Graphics.
      */
     protected void paint(Graphics g) {
@@ -225,7 +230,8 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel pela navegação das abas do NanoChart pelo teclado.
-     * @param keyCode
+	 *
+     * @param keyCode codigo da tecla.
      */
     protected void keyPressed(int keyCode) {
         int tecla = getGameAction(keyCode);
@@ -243,6 +249,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel pela navegação das abas do NanoChart pelo tela touch screen.
+	 *
      * @param x localização no eixo x da tela.
      * @param y localização no eixo y da tela.
      */
@@ -260,6 +267,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por retornar o maior valor do array de valores.
+	 *
      * @return maior valor do array de valores.
      */
     private int getMaiorValor() {
@@ -278,6 +286,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel por retornar o tamanho de uma coluna.
+	 *
      * @return valor maximo de uma coluna.
      */
     private int getTamMaxColuna() {
@@ -286,6 +295,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel por retornar a quantidade de pixel de uma coluna.
+	 *
      * @param valor
      * @return quantidade de pixels de uma coluna.
      */
@@ -296,6 +306,7 @@ public class NanoChart extends Canvas {
     /**
      * Método responsavel por retornar o valor da legenda de acordo com o
      * construtor escolhido.
+	 *
      * @param linha numero da linha do valor da legenda.
      * @return valor da legenda.
      */
@@ -315,6 +326,7 @@ public class NanoChart extends Canvas {
      * Método responsavel por desenhar as tabs "Grafico" e "Dados.<br/>
      * No momento da elaboração das tabs são armazenados as posições das mesmas
      * para que o NanoChart tenha suporte a aparelhos com telas touch screen.
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaTab(Graphics g) {
@@ -359,7 +371,8 @@ public class NanoChart extends Canvas {
     }
 
     /**
-     * Método responsável por desenhar os eixos X e Y do gráfico de barras.
+     * Método responsável por desenhar as linhas dos eixos X e Y do gráfico de barras.
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaEixo(Graphics g) {
@@ -384,6 +397,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por desenhar o grafico de barras.
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaColuna(Graphics g) {
@@ -404,6 +418,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por desenhar o grafico de pizza.
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaPizza(Graphics g) {
@@ -446,7 +461,8 @@ public class NanoChart extends Canvas {
     }
 
     /**
-     * Método responsavel por desenhas a legenda que aparecerá na aba "Dados".
+     * Método responsavel por desenhar a legenda que aparecerá na aba "Dados".
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaLegenda(Graphics g) {
@@ -473,6 +489,7 @@ public class NanoChart extends Canvas {
      *   <li>Verifica se a quantidade de valores não ultrapassou 10 posições.</li>
      *   <li>Verifica se o tamanho do array do rótulo é igual ao do valor.</li>
      * </ul>
+	 *
      * @param g instancia para a classe Graphics.
      */
     private void validaInformacoes(Graphics g) {
@@ -495,26 +512,6 @@ public class NanoChart extends Canvas {
             g.setColor(Cor.PRETO);
             g.setFont(fonteMed);
             g.drawString(erro.toString(), 0, 0, Graphics.LEFT | Graphics.TOP);
-        }
-    }
-
-    /**
-     * 
-     */
-    private class Sair extends MIDlet {
-
-        protected void startApp() {
-        }
-
-        protected void pauseApp() {
-        }
-
-        protected void destroyApp(boolean unconditional) {
-            try {
-                notifyDestroyed();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

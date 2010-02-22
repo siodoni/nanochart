@@ -9,6 +9,7 @@ import javax.microedition.lcdui.Display;
 /**
  * Exemplo de midlet que utiliza a biblioteca NanoChart.<br/>
  * No exemplo foi utilizado o método random.nextInt para a geração de valores aleatórios.
+ *
  * @author Flavio Augusto Siodoni Ximenes
  */
 public class Midlet extends MIDlet implements Cor {
@@ -56,6 +57,7 @@ public class Midlet extends MIDlet implements Cor {
 
     /**
      * Método responsável por destruir a aplicação.
+	 *
      * @param unconditional
      */
     public void destroyApp(boolean unconditional) {

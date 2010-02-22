@@ -11,7 +11,7 @@ package br.com.siodoni.nanochart.util;
  * Caso a cor desejada não esteja presente na interface, é possivel utilizar
  * o codigo RGB (Red, Green, Blue) hexadecimal, o mesmo padrão utilizado para paginas em html.<br/>
  * Exemplo:<br/>
- * Cor branco
+ * Cor branca
  * <ul>
  *   <li>Código hexadecimal para página html: #FFFFFF</li>
  *   <li>Código hexadecimal para o NanoChart: 0x00FFFFFF</li>
