@@ -15,7 +15,7 @@ public final class Util {
      * Essa funcionalidade se torna necessária para a montagem do grafico,
      * pois os métodos de desenho da classe Graphics utilizam como padrão valores
      * inteiros, pois só existem pixels com valores inteiros.<br/>
-	 *
+     *
      * @param valor array de doubles que será convertido.
      * @return int[] array de inteiros que será utilizado para a elaboração do grafico.
      * @see br.com.siodoni.nanochart.NanoChart
@@ -35,7 +35,7 @@ public final class Util {
      * Essa funcionalidade se torna necessária para a montagem do grafico,
      * pois os métodos de desenho da classe Graphics utilizam como padrão valores
      * inteiros, pois só existem pixels com valores inteiros.<br/>
-	 *
+     *
      * @param valor array de floats que será convertido.
      * @return int[] array de inteiros que será utilizado para a elaboração do grafico.
      * @see br.com.siodoni.nanochart.NanoChart
