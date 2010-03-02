@@ -57,7 +57,7 @@ public class Midlet extends MIDlet implements Cor {
 
     /**
      * Método responsável por destruir a aplicação.
-	 *
+     *
      * @param unconditional
      */
     public void destroyApp(boolean unconditional) {

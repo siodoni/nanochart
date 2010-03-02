@@ -5,7 +5,6 @@ import br.com.siodoni.nanochart.util.Cor;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.midlet.MIDlet;
 
 /**
  * Classe responsável por montar o grafico de barra ou pizza de acordo com as
@@ -96,7 +95,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores int.
-	 *
+     *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
@@ -116,7 +115,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores double.
-	 *
+     *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
@@ -137,7 +136,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Construtor da classe NanoChart para valores float.
-	 *
+     *
      * @param cor informe o array de cores para a montagem do grafico.
      * @param valor informe o array de valores para a montagem do grafico.
      * @param rotulo informe o array de rotulos para a montagem do grafico.
@@ -189,7 +188,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por "desenhar" o gráfico na tela do aparelho móvel.
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     protected void paint(Graphics g) {
@@ -230,7 +229,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel pela navegação das abas do NanoChart pelo teclado.
-	 *
+     *
      * @param keyCode codigo da tecla.
      */
     protected void keyPressed(int keyCode) {
@@ -249,7 +248,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel pela navegação das abas do NanoChart pelo tela touch screen.
-	 *
+     *
      * @param x localização no eixo x da tela.
      * @param y localização no eixo y da tela.
      */
@@ -267,7 +266,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por retornar o maior valor do array de valores.
-	 *
+     *
      * @return maior valor do array de valores.
      */
     private int getMaiorValor() {
@@ -286,7 +285,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel por retornar o tamanho de uma coluna.
-	 *
+     *
      * @return valor maximo de uma coluna.
      */
     private int getTamMaxColuna() {
@@ -295,7 +294,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel por retornar a quantidade de pixel de uma coluna.
-	 *
+     *
      * @param valor
      * @return quantidade de pixels de uma coluna.
      */
@@ -306,7 +305,7 @@ public class NanoChart extends Canvas {
     /**
      * Método responsavel por retornar o valor da legenda de acordo com o
      * construtor escolhido.
-	 *
+     *
      * @param linha numero da linha do valor da legenda.
      * @return valor da legenda.
      */
@@ -326,7 +325,7 @@ public class NanoChart extends Canvas {
      * Método responsavel por desenhar as tabs "Grafico" e "Dados.<br/>
      * No momento da elaboração das tabs são armazenados as posições das mesmas
      * para que o NanoChart tenha suporte a aparelhos com telas touch screen.
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaTab(Graphics g) {
@@ -372,13 +371,14 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por desenhar as linhas dos eixos X e Y do gráfico de barras.
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaEixo(Graphics g) {
         //Fundo
         g.setColor(Cor.CINZA1);
         g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura - 2, fimAltura - inicioAltura);
+
 
         //Contornos
         g.setColor(Cor.CINZA3);
@@ -397,7 +397,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por desenhar o grafico de barras.
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaColuna(Graphics g) {
@@ -418,7 +418,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsável por desenhar o grafico de pizza.
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaPizza(Graphics g) {
@@ -462,7 +462,7 @@ public class NanoChart extends Canvas {
 
     /**
      * Método responsavel por desenhar a legenda que aparecerá na aba "Dados".
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void desenhaLegenda(Graphics g) {
@@ -489,7 +489,7 @@ public class NanoChart extends Canvas {
      *   <li>Verifica se a quantidade de valores não ultrapassou 10 posições.</li>
      *   <li>Verifica se o tamanho do array do rótulo é igual ao do valor.</li>
      * </ul>
-	 *
+     *
      * @param g instancia para a classe Graphics.
      */
     private void validaInformacoes(Graphics g) {
