@@ -379,7 +379,6 @@ public class NanoChart extends Canvas {
         g.setColor(Cor.CINZA1);
         g.fillRect(inicioLargura, inicioAltura, fimLargura - inicioLargura - 2, fimAltura - inicioAltura);
 
-
         //Contornos
         g.setColor(Cor.CINZA3);
         g.drawLine(inicioLargura, inicioAltura - 1, fimLargura - 3, inicioAltura - 1);
