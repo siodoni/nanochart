@@ -253,14 +253,14 @@ public class NanoChart extends Canvas {
      * @param y localização no eixo y da tela.
      */
     protected void pointerPressed(int x, int y) {
-        if ((x >= posTab[0] && x <= posTab[2]) && (y >= posTab[1] && y <= posTab[3])) {
-            grafico = true;
-            repaint();
-            serviceRepaints();
-        } else if ((x >= posTab[4] && x <= posTab[6]) && (y >= posTab[5] && y <= posTab[7])) {
-            grafico = false;
-            repaint();
-            serviceRepaints();
+        if (hasPointerEvents()) {
+            if ((x >= posTab[0] && x <= posTab[2]) && (y >= posTab[1] && y <= posTab[3])) {
+                grafico = true;
+                repaint();
+            } else if ((x >= posTab[4] && x <= posTab[6]) && (y >= posTab[5] && y <= posTab[7])) {
+                grafico = false;
+                repaint();
+            }
         }
     }
 
@@ -442,7 +442,6 @@ public class NanoChart extends Canvas {
             soma += valorAngulo[i];
         }
 
-        //TODO *** melhorar essa parte pois o maior valor está sendo alterado arbitrariamente, deverá ser feito um rateio.
         if (soma > 360) {
             valorAngulo[posicaoMaiorVlr] -= (soma - 360);
         } else if (soma < 360) {
