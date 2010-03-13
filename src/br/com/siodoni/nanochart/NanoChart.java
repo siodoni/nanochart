@@ -37,10 +37,10 @@ import javax.microedition.lcdui.Graphics;
  *         String titulo = "Exemplo de gráfico aleatório";
  *
  *         //Tipo de gráfico utilizado. Podendo ser GRAFICO_BARRA ou GRAFICO_PIZZA.
- *         int tpGrafico = NanoChart.GRAFICO_PIZZA;
+ *         int tpGrafico = NanoChart.GRAFICO_BARRA;
  *
  *         //Montando de forma aleatória os valores e as legendas.
- *         for (int i = 0; i < valor.length; i++) {
+ *         for (int i = 0; i <bloquote><</bloquote> valor.length; i++) {
  *             valor[i] = random.nextInt(50) + 1;
  *             rotulo[i] = "valor aleatório";
  *         }
