@@ -11,7 +11,7 @@ public final class Util {
 
     /**
      * Método responsável por converter um array de valores double
-     * para um vetor de valores inteiros.<br/>
+     * para um array de valores inteiros.<br/>
      * Essa funcionalidade se torna necessária para a montagem do grafico,
      * pois os métodos de desenho da classe Graphics utilizam como padrão valores
      * inteiros, pois só existem pixels com valores inteiros.<br/>
@@ -31,7 +31,7 @@ public final class Util {
 
     /**
      * Método responsável por converter um array de valores float
-     * para um vetor de valores inteiros.<br/>
+     * para um array de valores inteiros.<br/>
      * Essa funcionalidade se torna necessária para a montagem do grafico,
      * pois os métodos de desenho da classe Graphics utilizam como padrão valores
      * inteiros, pois só existem pixels com valores inteiros.<br/>
