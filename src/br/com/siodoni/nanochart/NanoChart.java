@@ -67,9 +67,8 @@ import javax.microedition.lcdui.Graphics;
  */
 public class NanoChart extends Canvas {
 
-    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor, tipoGrafico;
+    private int largura, altura, inicioAltura, fimAltura, inicioLargura, fimLargura, areaTotal, distCol, acumulado, larguraColuna, percLargura, tamRotulo, tamValor, maiorValor, tipoGrafico, tamTab, altTab, largTab, angTab;
     private int valorInt[], cor[], posTab[] = new int[8];
-    private int tamTab, altTab, largTab, angTab;
     private float valorFloat[];
     private double valorDouble[];
     private String rotulo[];
@@ -303,6 +302,16 @@ public class NanoChart extends Canvas {
     }
 
     /**
+     * Método responsável por retornar o valor do angulo da fatia da pizza.
+     * @param valor a ser calculado.
+     * @param soma total dos valores que compõem o gráfico.
+     * @return valor do angulo da fatia da pizza.
+     */
+    private double getValorAnguloPizza(double valor, double soma) {
+        return (valor / soma) * 360;
+    }
+
+    /**
      * Método responsavel por retornar o valor da legenda de acordo com o
      * construtor escolhido.
      *
@@ -421,7 +430,7 @@ public class NanoChart extends Canvas {
      * @param g instancia para a classe Graphics.
      */
     private void desenhaPizza(Graphics g) {
-        int anguloAcumulado = 0, soma = 0, angulo = 0, posicaoMaiorVlr = 0;
+        int anguloAcumulado = 0, soma = 0, posicaoMaiorVlr = 0;
         int valorAngulo[] = new int[tamValor];
 
         for (int i = 0; i < tamValor; i++) {
@@ -429,15 +438,12 @@ public class NanoChart extends Canvas {
         }
 
         for (int i = 0; i < tamValor; i++) {
-            angulo = (soma / valorInt[i]);
-            valorAngulo[i] = 360 / angulo;
+            valorAngulo[i] = (int) getValorAnguloPizza(valorInt[i], soma);
             if (valorInt[i] == getMaiorValor()) {
                 posicaoMaiorVlr = i;
             }
         }
-
         soma = 0;
-
         for (int i = 0; i < tamValor; i++) {
             soma += valorAngulo[i];
         }
@@ -466,7 +472,7 @@ public class NanoChart extends Canvas {
     private void desenhaLegenda(Graphics g) {
         g.setFont(fontePeq);
         acumulado = inicioAltura;
-        int tamLegenda = fontePeq.getHeight();//altura / 20;
+        int tamLegenda = fontePeq.getHeight();
 
         for (int i = 0; i < tamValor; i++) {
             g.setColor(cor[i]);
