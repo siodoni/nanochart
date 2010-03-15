@@ -1,0 +1,32 @@
+No capítulo 2 é necessário realizar uma descrição mais detalhada a respeito da tecnologia
+que será utilizada no projeto, que no caso é o J2ME. No site da SUN tem muitas figuras
+que descrevem a organização do framework, que podem ser muito interessantes para ilustrar
+a tecnologia.
+
+Além disso, é necessário incluir referências bibliográficas a respeito do SuperWaba, Android
+e Symbian, PORÉM é muito importante NÃO utilizar a WIKIPEDIA como referência, pois muitas
+informações não são confiáveis.
+
+
+
+O capítulo 3 ficou muito bom, precisamos fazer algumas pequenas alterações:
+
+(1) Antes de iniciar o capítulo você pode incluir um parágrafo com as considerações iniciais
+a respeito do conteúdo que será abordado no capítulo... Algo do tipo: "Neste capítulo será
+apresentado os conceitos fundamentais a respeito do desenvolvimento de interfaces..."
+
+(2) Outro ponto importante é no final no capítulo incluir uma seção de fechamento, denominada
+"Considerações Finais".
+
+
+
+No capítulo 4 também é importante incluir as considerações iniciais, antes da Figura 10.
+O texto está muito didático, e gostei muito da maneira que você organizou, precisamos
+apenas padronizar algumas coisas, como por exemplo o emulador utilizado para visualizar a
+aplicação.
+
+Além disso, você pode formatar o código fonte da figura 22 com o Notepad++... Me lembra
+no sábado que eu mostro para você como fazer isso!
+
+Faça as alterações no capítulo e mande uma nova versão, contendo todos os capítulos em
+um único arquivo, ok!
